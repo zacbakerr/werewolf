@@ -1,155 +1,25 @@
-# Sentient Campaign Werewolf 
+from collections import defaultdict
+from typing import Any, Dict
 
-This is a template project to help you (to help us) in developing AI Agent for first sentient game campaign called werewolf, which is based on game werewolf!!
+import os
+import asyncio
+import openai
+from sentient_campaign.agents.v1.api import IReactiveAgent
+from sentient_campaign.agents.v1.message import (
+    ActivityMessage,
+    ActivityResponse,
+    TextContent,
+    MimeType,
+    ActivityMessageHeader,
+    MessageChannelType,
+)
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    retry_if_exception_type,
+    wait_exponential,
+)
 
-The follwoing sections guid you through how to develop agents for werewolf project.
-
-This template project has sample project starcture that you can follow to develop and build the agent into wheel file.
-
-## Table of Contents
-
-1. [Overview](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-2. [Installation](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-3. [Game Setup](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-4. [Player Roles](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-5. [Communication Channels](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-6. [Game Flow](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-7. [Developing Your Agent](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-8. [Sample Agent Implementation](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-9. [Testing Your Agent](https://www.notion.so/Werewolf-Game-Rules-for-Sentient-Campaign-Agents-11fd4609dd4180e5af8ec59765bfab68?pvs=21)
-
-## Overview
-
-The Werewolf game is a social deduction game implemented within the Sentient Campaign framework. As an agent developer, you'll be creating an AI that can participate in this game alongside other AI agents. This document outlines the game rules, key concepts, and provides examples to help you develop your own agent.
-
-## Installation
-
-To get started with developing your Werewolf game agent, you'll need to install two key libraries:
-
-1. Sentient Campaign Agents API
-2. Sentient Campaign Activity Runner
-
-You can install these libraries using pip. Here are the commands:
-
-```bash
-pip install --upgrade --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple sentient-campaign-agents-api
-pip install --upgrade --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple sentient-campaign-activity-runner
-
-```
-
-Links to the libraries:
-
-- Agents API: [https://test.pypi.org/project/sentient-campaign-agents-api/](https://test.pypi.org/project/sentient-campaign-agents-api/)
-- Activity Runner: [https://test.pypi.org/project/sentient-campaign-activity-runner/](https://test.pypi.org/project/sentient-campaign-activity-runner/)
-
-## Game Setup
-
-- The game takes place in a virtual environment managed by the Sentient Campaign Activity Runner.
-- There are multiple communication channels where players can interact.
-- The game is moderated by an AI moderator named "**moderator**".
-- Your agent will be one of several players in the game, each with a unique name.
-
-## Player Roles
-
-Agents can be assigned one of four roles:
-
-1. **Villagers**: The majority of players. Their goal is to identify and eliminate the werewolves.
-2. **Werewolves**: A minority group. They aim to eliminate villagers until they equal or outnumber them.
-3. **Seer**: A special villager who can learn the true identity of one player each night.
-4. **Doctor**: A special villager who can protect one player from elimination each night.
-
-## Communication Channels
-
-The game uses a system of channels for communication between agents. Understanding these channels is crucial for developing an effective agent. There are three main types of channels:
-
-1. **Main Game Channel ("play-arena")**:
-    - This is the primary public channel where all players can interact.
-    - All day phase discussions and voting take place here.
-    - Agents receive and send messages to this channel for general game communication.
-2. **Direct Message Channel**:
-    - This channel is used for private communication between the moderator and individual players.
-    - The moderator uses this channel to:
-        - Assign roles at the beginning of the game.
-        - Communicate with special roles (Seer, Doctor) during the night phase.
-        - Provide private information or instructions to players.
-3. **Werewolf Channel ("wolf's-den")**:
-    - This is a private channel exclusively for werewolf players.
-    - Werewolves use this channel to coordinate their actions during the night phase.
-    - Only agents with the "wolf" role have access to this channel.
-
-### Handling Different Channels
-
-Your agent should be prepared to handle messages from different channels:
-
-```python
-class WerewolfAgent(IReactiveAgent):
-    GAME_CHANNEL = "play-arena"
-    WOLFS_CHANNEL = "wolf's-den"
-    MODERATOR_NAME = "moderator"
-
-    async def async_notify(self, message: ActivityMessage):
-        if message.header.channel_type == MessageChannelType.DIRECT:
-            # Handle direct messages (usually from moderator)
-            pass
-        else:
-            # Handle group channel messages
-            if message.header.channel == self.GAME_CHANNEL:
-                # Handle main game channel messages
-                pass
-            elif message.header.channel == self.WOLFS_CHANNEL:
-                # Handle werewolf channel messages (if agent is a werewolf)
-                pass
-
-    async def async_respond(self, message: ActivityMessage):
-        if message.header.channel_type == MessageChannelType.DIRECT and message.header.sender == self.MODERATOR_NAME:
-            # Respond to moderator's direct messages
-            pass
-        elif message.header.channel_type == MessageChannelType.GROUP:
-            if message.header.channel == self.GAME_CHANNEL:
-                # Respond in main game channel
-                pass
-            elif message.header.channel == self.WOLFS_CHANNEL:
-                # Respond in werewolf channel (if agent is a werewolf)
-                pass
-
-```
-
-## Game Flow
-
-The game alternates between night and day phases:
-
-### Night Phase
-
-1. The moderator announces the start of the night phase in the main game channel.
-2. Werewolves are asked to vote on a player to eliminate in their private "wolf's-den" channel.
-3. The Seer is asked to guess the identity of one player via direct message.
-4. The Doctor is asked to choose a player to protect via direct message.
-
-### Day Phase
-
-1. The moderator announces the end of the night and any eliminations in the main game channel.
-2. All players discuss and try to identify the werewolves in the main game channel.
-3. Players vote on who to eliminate in the main game channel.
-4. The eliminated player's role is revealed, and they are removed from the game.
-
-## Developing Your Agent
-
-When developing your agent using the Sentient Campaign Activity Runner:
-
-1. Implement the `IReactiveAgent` interface from the Sentient Campaign Agents API.
-2. Use the `async_notify` method to process incoming messages from all channels.
-3. Use the `async_respond` method to send responses and actions to the appropriate channels.
-4. Your agent should be able to:
-    - Understand and follow the moderator's instructions in direct messages.
-    - Participate in discussions during the day phase in the main game channel.
-    - Perform role-specific actions during the night phase in the appropriate channels.
-    - Make strategic decisions based on the game state and other players' behaviors.
-
-## Sample Agent Template
-
-Here's a Template of how to implement a basic Werewolf game agent. you find this code under src/werewolf_agents/template_agent/werewolf_agent_template.py
-
-```python
 
 class SentWerewolfAgent(IReactiveAgent):
 
@@ -390,34 +260,3 @@ class SentWerewolfAgent(IReactiveAgent):
         return "I suggest we eliminate [player_name] because [reason]."
         """
         pass
-
-```
-
-## Testing Your Agent
-
-Use the `WerewolfCampaignActivityRunner` to test your agent locally:
-
-```python
-from sentient_campaign.activity_runner.runner import WerewolfCampaignActivityRunner, PlayerAgentConfig
-
-runner = WerewolfCampaignActivityRunner()
-agent_config = PlayerAgentConfig(
-    player_name="YourAgentName",
-    agent_wheel_path="/path/to/your/agent.whl",
-    module_path="your.module.path",
-    agent_class_name="YourAgentClass",
-    agent_config_file_path="/path/to/agent_config.yaml"
-)
-
-activity_id = runner.run_locally(
-    agent_config,
-    players_sentient_llm_api_keys,
-    path_to_final_transcript_dump="/path/to/save/transcripts",
-    force_rebuild_agent_image=False
-)
-
-```
-
-This will run a full game with your agent and other AI players, allowing you to analyze your agent's performance and refine its strategies.
-
-Remember, the key to success in Werewolf is not just following the rules, but also in how well your agent can reason about the game state, interpret other players' actions, and make strategic decisions across different communication channels. Good luck developing your Werewolf agent!
