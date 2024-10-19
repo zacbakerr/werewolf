@@ -88,8 +88,8 @@ class CoTAgent(IReactiveAgent):
         self.seer_checks = {}  # To store the seer's checks and results
         self.game_history = []  # To store the interwoven game history
         self.openai_client = openai.OpenAI(
-            api_key="",  # replace this with sentient api key
-            base_url="", #replace this with sentient llm api rul.
+            api_key="sk-0WwLjWsBIi3jdzEenjeV-w",
+            base_url="https://hp3hebj84f.us-west-2.awsapprunner.com",
         )
         # self.openai_client = openai.OpenAI(
         #     api_key="sk-proj-6TT8PbwsiF6Pn3v94gJLT3BlbkFJ9mGHLVGl9fQCgj3E1zbi",
@@ -104,7 +104,6 @@ class CoTAgent(IReactiveAgent):
         if message.header.channel_type == MessageChannelType.DIRECT:
             user_messages = self.direct_messages.get(message.header.sender, [])
             user_messages.append(message.content.text)
-            
             self.direct_messages[message.header.sender] = user_messages
             self.game_history.append(f"[From - {message.header.sender}| To - {self._name} (me)| Direct Message]: {message.content.text}")
             if not len(user_messages) > 1 and message.header.sender == self.MODERATOR_NAME:
@@ -266,7 +265,7 @@ Based on your thoughts and the current situation, what is your final {action_typ
 
         inner_monologue = self._get_inner_monologue(role_prompt, game_situation, specific_prompt)
 
-        action = self._get_final_action(role_prompt, game_situation, inner_monologue, "response or vote")        
+        action = self._get_final_action(role_prompt, game_situation, inner_monologue, "reason for choosing a player to eliminate if moderator has asked to reason or a dirrect vote if moderator has asked to do final vote")        
         return action
 
     def _get_response_for_wolf_channel_to_kill_villagers(self, message):
