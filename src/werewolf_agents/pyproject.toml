@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "you agennt"
+name = "you agent"
 version = "0.0.1"
 description = "A description of your project"
 authors = ["your name <your email>"]  # Add your name and email here
@@ -7,6 +7,7 @@ packages = [{include = "your_agent"}]  # Add the name of your agent directory he
 
 
 [tool.poetry.dependencies]
+autogen = "0.3.1"
 python = "^3.12"
 tenacity = "^9.0.0"
 openai = "^1.47.1"
