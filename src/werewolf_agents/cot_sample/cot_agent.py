@@ -88,11 +88,11 @@ class CoTAgent(IReactiveAgent):
         self.seer_checks = {}  # To store the seer's checks and results
         self.game_history = []  # To store the interwoven game history
         self.openai_client = openai.OpenAI(
-            api_key="sk-0WwLjWsBIi3jdzEenjeV-w",
+            api_key="",
             base_url="https://hp3hebj84f.us-west-2.awsapprunner.com",
         )
         # self.openai_client = openai.OpenAI(
-        #     api_key="sk-proj-6TT8PbwsiF6Pn3v94gJLT3BlbkFJ9mGHLVGl9fQCgj3E1zbi",
+        #     api_key="",
         # )
         self.model = "meta.llama3-70b-instruct-v1:0" # "gpt-4o-mini" 
         logger.info(
