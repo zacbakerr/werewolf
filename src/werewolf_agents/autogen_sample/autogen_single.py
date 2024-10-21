@@ -152,41 +152,43 @@ class FunWerewolfAgent(IReactiveAgent):
         )
         logger.debug("Message sent to conversable_agent for response.")
 
-# Main execution block for testing the agent
-if __name__ == "__main__":
-    import random
+# Add in your api keys here to use below:
 
-    # Configure the LLM (Language Model) settings
-    config_list = [
-        {
-            "model": random.choice(["meta.llama3-70b-instruct-v1:0"]),
-            "api_key": random.choice(
-                ["sk-0WwLjWsBIi3jdzEenjeV-w", "sk-uO8i0FX0nXwSP6BMIA726g"]
-            ),
-            "base_url": "https://hp3hebj84f.us-west-2.awsapprunner.com",
-            "max_retries": 3,
-            "timeout": 30,
-        }
-    ]
+# # Main execution block for testing the agent
+# if __name__ == "__main__":
+#     import random
 
-    llm_config = {"config_list": config_list}
+#     # Configure the LLM (Language Model) settings
+#     config_list = [
+#         {
+#             "model": random.choice(["meta.llama3-70b-instruct-v1:0"]),
+#             "api_key": random.choice(
+#                 ["", ""] # add your api keys here
+#             ),
+#             "base_url": "https://hp3hebj84f.us-west-2.awsapprunner.com",
+#             "max_retries": 3,
+#             "timeout": 30,
+#         }
+#     ]
 
-    # Create and initialize the demo agent
-    demo_agent = FunWerewolfAgent()
-    demo_agent.__initialize__(
-        "sagar", "strong werewolf agent", {"llm_config": llm_config}
-    )
+#     llm_config = {"config_list": config_list}
 
-    # Run a test response
-    asyncio.run(demo_agent.async_respond(ActivityMessage(
-        header=ActivityMessageHeader(
-            message_id="bbb",
-            sender="vivek",
-            channel="dirrect",
-            channel_type=MessageChannelType.DIRECT,
-            target_receivers=[]
-        ),
-        content=TextContent(text="hello"),
-        content_type=MimeType.TEXT_PLAIN
-    )))
-    logger.debug("Demo agent initialized and ready.")
+#     # Create and initialize the demo agent
+#     demo_agent = FunWerewolfAgent()
+#     demo_agent.__initialize__(
+#         "sagar", "strong werewolf agent", {"llm_config": llm_config}
+#     )
+
+#     # Run a test response
+#     asyncio.run(demo_agent.async_respond(ActivityMessage(
+#         header=ActivityMessageHeader(
+#             message_id="bbb",
+#             sender="vivek",
+#             channel="dirrect",
+#             channel_type=MessageChannelType.DIRECT,
+#             target_receivers=[]
+#         ),
+#         content=TextContent(text="hello"),
+#         content_type=MimeType.TEXT_PLAIN
+#     )))
+#     logger.debug("Demo agent initialized and ready.")
