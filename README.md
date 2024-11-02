@@ -302,6 +302,7 @@ password: moderator
 1. Make sure that you rebuild your agent before running it by using poetry build
 2. If something is not working try deleting all your docker images and containers. Make sure that you are not filtering the docker images and containers that are visible in docker desktop
 3. Make sure that you run poetry build before you try a runner file. Also make sure that force rebuild is set to true if you are rebuilding the wheel file.
+4. You may need to disable your VPN to view games in Hydrogen. 
 
 
 # Appendix
