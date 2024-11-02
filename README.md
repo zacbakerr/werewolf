@@ -62,7 +62,7 @@ We have written code that lets you run werewolf games locally. This way you can 
 
 **Sun Nov. 3rd:** Werewolf code released to teams to start coding (online).
 
-**Thu Nov. 8th:** Teams can submit agents to pre-tournament by 8 pm to see where they stack fair against other players.
+**Fri Nov. 8th:** Teams can submit agents to pre-tournament by noon to see where they stack fair against other players.
 
 **Sat Nov. 9th:** Teams view results of pre-tournament and hack all day live at AGI House.
 
