@@ -165,7 +165,7 @@ class FunWerewolfAgent(IReactiveAgent):
 #             "api_key": random.choice(
 #                 ["", ""] # add your api keys here
 #             ),
-#             "base_url": "https://hp3hebj84f.us-west-2.awsapprunner.com",
+#             "base_url": "", #add url here
 #             "max_retries": 3,
 #             "timeout": 30,
 #         }

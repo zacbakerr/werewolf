@@ -1,13 +1,13 @@
 from typing import Any, Dict
 from autogen import ConversableAgent, Agent, runtime_logging
 
-import os
+import os,json,re
 import asyncio
 import logging
 from collections import defaultdict
 
 import openai
-from openai import RateLimitError
+from openai import RateLimitError, OpenAI
 from sentient_campaign.agents.v1.api import IReactiveAgent
 from sentient_campaign.agents.v1.message import (
     ActivityMessage,
@@ -23,7 +23,10 @@ from tenacity import (
     retry_if_exception_type,
     wait_exponential,
 )
-import random
+GAME_CHANNEL = "play-arena"
+WOLFS_CHANNEL = "wolf's-den"
+MODERATOR_NAME = "moderator"
+MODEL_NAME = "Llama31-70B-Instruct"
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -39,12 +42,8 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-GAME_CHANNEL = "play-arena"
-WOLFS_CHANNEL = "wolf's-den"
-MODERATOR_NAME = "moderator"
-
-
 class CoTAgent(IReactiveAgent):
+    # input -> thoughts -> init action -> reflection -> final action
 
     WOLF_PROMPT = """You are a wolf in a game of Werewolf. Your goal is to eliminate villagers without being detected. Consider the following:
     1. Blend in with villagers during day discussions.
@@ -82,22 +81,25 @@ class CoTAgent(IReactiveAgent):
         self.WOLFS_CHANNEL = WOLFS_CHANNEL
         self.GAME_CHANNEL = GAME_CHANNEL
         self.config = config
+        self.have_thoughts = True
+        self.have_reflection = True
         self.role = None
         self.direct_messages = defaultdict(list)
         self.group_channel_messages = defaultdict(list)
         self.seer_checks = {}  # To store the seer's checks and results
         self.game_history = []  # To store the interwoven game history
-        self.openai_client = openai.OpenAI(
-            api_key="",
-            base_url="https://hp3hebj84f.us-west-2.awsapprunner.com",
+
+        self.llm_config = self.sentient_llm_config["config_list"][0]
+        self.openai_client = OpenAI(
+            api_key=self.llm_config["api_key"],
+            base_url=self.llm_config["llm_base_url"],
         )
-        # self.openai_client = openai.OpenAI(
-        #     api_key="",
-        # )
-        self.model = "meta.llama3-70b-instruct-v1:0" # "gpt-4o-mini" 
+
+        self.model = MODEL_NAME
         logger.info(
             f"WerewolfAgent initialized with name: {name}, description: {description}, and config: {config}"
         )
+        self.game_intro = None
 
     async def async_notify(self, message: ActivityMessage):
         logger.info(f"ASYNC NOTIFY called with message: {message}")
@@ -114,6 +116,9 @@ class CoTAgent(IReactiveAgent):
             group_messages.append((message.header.sender, message.content.text))
             self.group_channel_messages[message.header.channel] = group_messages
             self.game_history.append(f"[From - {message.header.sender}| To - Everyone| Group Message in {message.header.channel}]: {message.content.text}")
+            # if this is the first message in the game channel, the moderator is sending the rules, store them
+            if message.header.channel == self.GAME_CHANNEL and message.header.sender == self.MODERATOR_NAME and not self.game_intro:
+                self.game_intro = message.content.text
         logger.info(f"message stored in messages {message}")
 
     def get_interwoven_history(self, include_wolf_channel=False):
@@ -197,7 +202,9 @@ Current game situation (including your past thoughts and actions):
             ]
         )
         inner_monologue = response.choices[0].message.content
-        self.game_history.append(f"\n [My Thoughts]: {inner_monologue}")
+        # self.game_history.append(f"\n [My Thoughts]: {inner_monologue}")
+
+        logger.info(f"My Thoughts: {inner_monologue}")
         
         return inner_monologue
 
@@ -210,27 +217,94 @@ Current game situation (including past thoughts and actions):
 Your thoughts:
 {inner_monologue}
 
-Based on your thoughts and the current situation, what is your final {action_type}? Respond with only the {action_type}, without revealing your past thoughts. If it is a dialogue response, you can provide the full response that adds to the discussion. For all other cases a single sentence response is expected. If you are in the wolf-group channel, the sentence must contain the name of a person you wish to eliminate, and feel free to change your mind so that there is consensus. If you are in the game-room channel, the sentence must contain your response or vote, and it must be a vote to eliminate someone if the game moderator has recently messaged you asking for a vote, and also feel free to justify your vote, and later change your mind when the final vote count happens. You can choose to justify any change of mind too."""
+Based on your thoughts and the current situation, what is your {action_type}? Respond with only the {action_type} and no other sentences/thoughts. If it is a dialogue response, you can provide the full response that adds to the discussions so far. For all other cases a single sentence response is expected. If you are in the wolf-group channel, the sentence must contain the name of a person you wish to eliminate, and feel free to change your mind so that there is consensus. If you are in the game-room channel, the sentence must contain your response or vote, and it must be a vote to eliminate someone if the game moderator has recently messaged you asking for a vote, and also feel free to justify your vote, and later change your mind when the final vote count happens. You can justify any change of mind too. If the moderator for the reason behind the vote, you must provide the reason in the response."""
 
         response = self.openai_client.chat.completions.create(
-            model="meta.llama3-70b-instruct-v1:0",
+            model=self.model,
             messages=[
                 {"role": "system", "content": f"You are a {self.role} in a Werewolf game. Provide your final {action_type}."},
                 {"role": "user", "content": prompt}
             ]
         )
         
-        return response.choices[0].message.content
+        logger.info(f"My initial {action_type}: {response.choices[0].message.content}")
+        initial_action = response.choices[0].message.content
+        # do another run to reflect on the final action and do a sanity check, modify the response if need be
+        prompt = f"""{role_prompt}
+
+Current game situation (including past thoughts and actions):
+{game_situation}
+
+Your thoughts:
+{inner_monologue}
+
+Your initial action:
+{response.choices[0].message.content}
+
+Reflect on your final action given the situation and provide any criticisms. Answer the folling questions:
+1. What is my name and my role ? 
+2. Does my action align with my role and am I revealing too much about myself in a public channel? Does my action harm my team or my own interests?
+3. Is my action going against what my objective is in the game?
+3. How can I improve my action to better help the agents on my team and help me survive?"""
+        
+        response = self.openai_client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": f"You are a {self.role} in a Werewolf game. Reflect on your final action."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        logger.info(f"My reflection: {response.choices[0].message.content}")
+
+         # do another run to reflect on the final action and do a sanity check, modify the response if need be
+        prompt = f"""{role_prompt}
+
+Current game situation (including past thoughts and actions):
+{game_situation}
+
+Your thoughts:
+{inner_monologue}
+
+Your initial action:
+{initial_action}
+
+Your reflection:
+{response.choices[0].message.content}
+
+Based on your thoughts, the current situation, and your reflection on the initial action, what is your absolute final {action_type}? Respond with only the {action_type} and no other sentences/thoughts. If it is a dialogue response, you can provide the full response that adds to the discussions so far. For all other cases a single sentence response is expected. If you are in the wolf-group channel, the sentence must contain the name of a person you wish to eliminate, and feel free to change your mind so that there is consensus. If you are in the game-room channel, the sentence must contain your response or vote, and it must be a vote to eliminate someone if the game moderator has recently messaged you asking for a vote, and also feel free to justify your vote, and later change your mind when the final vote count happens. You can justify any change of mind too. If the moderator for the reason behind the vote, you must provide the reason in the response. If the moderator asked for the vote, you must mention at least one name to eliminate. If the moderator asked for a final vote, you must answer in a single sentence the name of the person you are voting to eliminate even if you are not sure."""
+        
+        response = self.openai_client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": f"You are a {self.role} in a Werewolf game. Provide your final {action_type}."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        
+        return response.choices[0].message.content.strip("\n ")
+    
+    def _summarize_game_history(self):
+
+        self.detailed_history = "\n".join(self.game_history)
+
+        # send the llm the previous summary of each of the other players and suspiciona nd information, the detailed chats of this day or night
+        # llm will summarize the game history and provide a summary of the game so far
+        # summarized game history is used for current situation
+
+        pass
+
 
     def _get_response_for_seer_guess(self, message):
         seer_checks_info = "\n".join([f"Checked {player}: {result}" for player, result in self.seer_checks.items()])
-        game_situation = f"{self.get_interwoven_history()}\n\nYour past seer checks:\n{seer_checks_info}"
+        game_situation = f"{self.get_interwoven_history()}\n\nMy past seer checks:\n{seer_checks_info}"
         
         specific_prompt = """think through your response by answering the following step-by-step:
 1. What new information has been revealed in recent conversations?
 2. Based on the game history, who seems most suspicious or important to check?
 3. How can I use my seer ability most effectively without revealing my role?
-4. What information would be most valuable for the village at this point in the game?"""
+4. What information would be most valuable for the village at this point in the game?
+5. How can I guide the discussion during the day subtly to help the village? Should I reveal my role at this point?"""
 
         inner_monologue = self._get_inner_monologue(self.SEER_PROMPT, game_situation, specific_prompt)
 
@@ -245,7 +319,8 @@ Based on your thoughts and the current situation, what is your final {action_typ
 1. Based on recent discussions, who seems to be in the most danger?
 2. Have I protected myself recently, or do I need to consider self-protection?
 3. Are there any players who might be the Seer or other key roles that I should prioritize?
-4. How can I vary my protection pattern to avoid being predictable to the werewolves?"""
+4. How can I vary my protection pattern to avoid being predictable to the werewolves?
+5. How can I contribute to the village discussions with or without revealing my role? Should I reveal my role at this point?"""
 
         inner_monologue = self._get_inner_monologue(self.DOCTOR_PROMPT, game_situation, specific_prompt)
 
@@ -261,11 +336,12 @@ Based on your thoughts and the current situation, what is your final {action_typ
 2. Based on the game history, who seems most suspicious or trustworthy?
 3. What evidence or observations can I share to help the village without revealing my role?
 4. How can I guide the discussion in a helpful direction based on what I know?
-5. If it's time to vote, who should I vote for and why, considering all the information available?"""
+5. If it's time to vote, who should I vote for and why, considering all the information available?
+6. How do I respond if accused during the day without revealing my role?"""
 
         inner_monologue = self._get_inner_monologue(role_prompt, game_situation, specific_prompt)
 
-        action = self._get_final_action(role_prompt, game_situation, inner_monologue, "reason for choosing a player to eliminate if moderator has asked to reason or a dirrect vote if moderator has asked to do final vote")        
+        action = self._get_final_action(role_prompt, game_situation, inner_monologue, "vote and discussion point which includes reasoning behind your vote")        
         return action
 
     def _get_response_for_wolf_channel_to_kill_villagers(self, message):
@@ -279,10 +355,10 @@ Based on your thoughts and the current situation, what is your final {action_typ
 2. Who might be the Seer or Doctor based on their behavior and comments?
 3. Which potential target would be least likely to raise suspicion if eliminated?
 4. How can we coordinate our actions with other werewolves to maximize our chances of success?
-5. Arrive at a consensus for the target and suggest it to the group. Always make suggestions to eliminate at least one person."""
+5. Arrive at a consensus for the target and suggest it to the group. Always make suggestions to eliminate at least one person.
+6. How can we defend ourselves if accused during the day without revealing our roles?"""
 
         inner_monologue = self._get_inner_monologue(self.WOLF_PROMPT, game_situation, specific_prompt)
 
         action = self._get_final_action(self.WOLF_PROMPT, game_situation, inner_monologue, "suggestion for target")        
         return action
-

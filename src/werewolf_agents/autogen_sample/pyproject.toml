@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "you agent"
+name = "james"
 version = "0.0.1"
 description = "A description of your project"
-authors = ["your name <your email>"]  # Add your name and email here
-packages = [{include = "your_agent"}]  # Add the name of your agent directory here
+authors = ["bond <your@email.com>"]  # Add your name and email here
+packages = [{include = "agent"}]  # Add the name of your agent directory here
 
 
 [tool.poetry.dependencies]
