@@ -26,7 +26,7 @@ The Sentient Campaign Activity Runner library, documented [here](https://test.py
 ```
 pip install --upgrade --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple sentient-campaign-activity-runner
 ```
-
+**Pro tip** the docs section of this README is super long and detailed, if using cursor or copilot just @ this file when trouble shooting!
 
 # Welcome
 
