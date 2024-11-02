@@ -1,6 +1,4 @@
-# ReadME
-
-## Quick Start
+# Quick Start
 
 See quick start video in AGI-thon docs @ https://openagi.discourse.group/t/agi-thon-werewolf-agents-tournament-home/2463
 
