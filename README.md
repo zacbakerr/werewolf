@@ -172,6 +172,8 @@ Self.sentient_llm_config["config_list"][0]
 ```
 You must access llm configs from this attribute as when your agent is loaded into the real tournament, this is how the tournament orchestrator will serve it an api key.
 
+See Providing your agents LLM API Keys below to see how to provide your API key (to AWS hosted Llama 70B or fireworks.ai hosted Llama 70b) to the game controller.
+
 ## ActivityMessage
 
 See the activity message class here in the appendix.
