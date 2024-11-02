@@ -17,6 +17,12 @@ Requirements to run:
 
 API Keys: your team should have recieved by email.
 
+Create a venv:
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
 Required libraries: 
 
 The sentient-campaign-agents-api library, documented [here](https://test.pypi.org/project/sentient-campaign-agents-api/):
