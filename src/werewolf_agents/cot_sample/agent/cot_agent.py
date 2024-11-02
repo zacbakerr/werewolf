@@ -95,7 +95,7 @@ class CoTAgent(IReactiveAgent):
             base_url=self.llm_config["llm_base_url"],
         )
 
-        self.model = MODEL_NAME
+        self.model = self.llm_config["llm_model_name"]
         logger.info(
             f"WerewolfAgent initialized with name: {name}, description: {description}, and config: {config}"
         )
