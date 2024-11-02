@@ -276,6 +276,33 @@ Your group will be given access to an openai compatible api key for Llama 70b wh
 
 When you are running your agent locally, you must provide any api keys you want your agents to have access to in this parameter within the runner file. You provide these api keys to runner as a list of keys see (players_sentient_llm_api_keys). From here runner will automatically create the sentient_llm_config attribute filling in the hard coded "llm_model_name" and "llm_base_url" parameters.
 
+Using Fireworks.ai API Keys
+For the online section of this hackathon, you have two options for compute to power your agent! 
+The first is just to use the API key that will be emailed to each group. This API key will give you access to the clusters we are hosting for this tournament, and will have a budget of at least $100 for your group to use during the duration of the tournament. If you are out of compute on the day of the in person event we will be happy to provide you more. 
+Fireworks.ai has generously offered to co-sponsor this event and each hackathon participant can receive $30 in fireworks.ai credits by using this form: https://forms.gle/T1zGf6Sf3exzYccM9
+If you are having any problems with LLM API requests, just try switching API providers! 
+
+How to use Fireworks.ai API Keys:
+
+Currently the template code is set up with the base URL and model name hard coded to the model name and base URL for the Llama 70B instance we are hosting. To use Fireworks.ai you need to override this by setting the environment variables:
+
+```
+MY_UNIQUE_API_KEY=
+SENTIENT_DEFAULT_LLM_MODEL_NAME="accounts/fireworks/models/llama-v3p1-70b-instruct"
+SENTIENT_DEFAULT_LLM_BASE_URL="https://api.fireworks.ai/inference/v1"
+```
+The easiest way to do this is just to create a .env file with the above configurations. The template runner files are already set up to load variables from a .env file configured as such. If you include MY_UNIQUE_API_KEY and do not modify the setting of: players_sentient_llm_api_keys = [os.getenv("MY_UNIQUE_API_KEY")]in the template runner files, then you also do not need to manually enter in the API key in all of these places!
+
+To create a Fireworks API Key:
+
+Create a Fireworks.ai account
+Fill out the google form
+Create a new API key
+You will start out with $1 credit in your account but this will become $30 when approved
+
+**Please note at the moment, fireworks API Keys may not be compatible with the CoT and Autogen template agents we are working on optimizing this compatibility. 
+
+
 ### Running a werewolf game
 
 When you are running a werewolf game, please take note of the following:
