@@ -85,8 +85,8 @@ class SimpleReactiveAgent(IReactiveAgent):
 # agent = SimpleReactiveAgent()
 # agent._sentient_llm_config = {
 #     "config_list": [{
-#             "llm_model_name": "meta.llama3-70b-instruct-v1:0",
-#             "api_key": "sk-gGL7SLOy4WTnJ40nlAOw_Q",
+#             "llm_model_name": "", # add model name here, should be: Llama31-70B-Instruct
+#             "api_key": "", # add your api key here
 #             "llm_base_url": "https://hp3hebj84f.us-west-2.awsapprunner.com"
 #         }]  
 # }
