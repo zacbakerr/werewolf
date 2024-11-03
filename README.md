@@ -57,6 +57,7 @@ MY_UNIQUE_API_KEY=
 SENTIENT_DEFAULT_LLM_BASE_URL="https://hp3hebj84f.us-west-2.awsapprunner.com"
 ```
 - Add your API Key above, if using fireworks set different model name and url.
+- Note if you formed a team late and are waiting for your key see instructions for using fireworks below!
 
 **Second**:
 Open runner.py in the simple_sample directory
