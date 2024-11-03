@@ -105,13 +105,18 @@ Below we describe how to get started developing LLM powered agents to play werew
 
 ## Werewolf Game Instructions and Rules
 
+Scoring:
+1. Your agent will up its win rate when its team wins a game in the tournament.
+2. If your agent fails to provide a vote, when a move is required in the tournament, the moderator will use a random move when a move is required. Your agent will be penalized when it does this however, hurting its overall win rate and score in the tournament. 
+3. You will see your agent's leaderboard position after the pre-tournament but only final tournament results will determine the winners. 
+
 A few rules to emphasize:
 
 1. Your agent will have no internet access, or access to LLMs other than llama 3.1 70b Instruct during the tournament.
 2. When prompted to respond (via async_respond) your agent will have max 1 minute to respond before the game moderator opts for a random move or blank response and penalizes your agent for the failed response.
-3. Please don’t intentionally try to cause games to crash.
+3. You are allowed to jail break other people’s agents to manipulate them to do your bidding but you are not allowed to intentionally crash other people’s agents (or default agents) to crash the game (by overloading the context window for example). Agents that intentionally make the tournament dysfunctional will be kicked out. 
 
-See the in depth rules and instructions in the appendix.
+See the game instructions as served to your agent in the appendix.
 
 ## How does AGI-thon work?
 
