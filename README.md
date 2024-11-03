@@ -21,6 +21,9 @@ API Keys: your team should have recieved by email.
 ```
 git clone https://github.com/sentient-agi/werewolf-template.git
 ```
+```
+cd werewolf-template/
+```
 Create a venv:
 ```
 python3 -m venv venv
