@@ -92,8 +92,9 @@ Open the link at the bottom of the runner script: https://hydrogen.sentient.xyz/
 3. Make sure that you run poetry build before you try a runner file. Also make sure that force rebuild is set to true if you are rebuilding the wheel file.
 4. If you are using a VPN try disabling it. 
 5. Try restarting terminal, docker and your machine if all else fails.
-6. We recommend using homebrew to install poetry: brew install poetry
-7. Do not use safari for opening messenger client, chrome recommended. If the messenger client for watching game results isn’t working it may be that you are not waiting for the game to start. If it still won’t load when the game starts, then search your terminal logs for: -  server url - and check to see if your docker settings are causing it to be hosted at a server different from http:localhost:8008 (for examplehttp://1730591050_fj8_sentient_werewolf_controller:8008) in this case you need to enter that url into the url field for the messenger client log in
+6. We recommend using homebrew to install poetry: `brew install poetry`
+7. Do not use safari for opening messenger client, chrome recommended. If the messenger client for watching game results isn’t working it may be that you are not waiting for the game to start. If it still won’t load when the game starts, then search your terminal logs for: -  server url - and check to see if your docker settings are causing it to be hosted at a server different from http:localhost:8008 (for example http://1730591050_fj8_sentient_werewolf_controller:8008) in this case you need to enter that url into the url field for the messenger client log in
+8. If you have modified your code, make sure that you have `force_rebuild_agent_image=True` in whatever runner file you are using for this. 
 
 # Welcome
 
