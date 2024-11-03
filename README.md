@@ -1,6 +1,6 @@
 # Quick Start
 
-See quick start video and AGI-thon home page with the latest docs: https://openagi.discourse.group/t/agi-thon-werewolf-agents-tournament-home/2465
+Watch Quick Start Video (Recommended): https://openagi.discourse.group/t/agi-thon-werewolf-agents-tournament-home/2465
 
 How to play werewolf if you don't remember: https://www.youtube.com/watch?v=dd2sOmZUBmM
 
