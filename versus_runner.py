@@ -2,12 +2,19 @@
 # This is runner file for running different agents against one another
 #########################################################################
 
+########################################################################
+# IMPORTANT: This file is currently under maintenance, right now you 
+# need to update all AGENT_CONFIGS below to use this, which is quite
+# tricky. Check back to github for a streamlined version coming soon. 
+#########################################################################
 
 from sentient_campaign.activity_runner.runner import WerewolfCampaignActivityRunner, PlayerAgentConfig, SentientWerewolfRoles
 from transcript.reorg_files import reorg_files
 import os
 from typing import Dict, List
 import random
+from dotenv import load_dotenv
+load_dotenv()
 
 # The following is the distribution of roles for the game
 # You can change the distribution of roles to test different configurations
@@ -25,25 +32,25 @@ DEFAULT_ROLE_DISTRIBUTION = {
     "doctor": {"agent_type": "simple", "count": 1}
 }
 # Your Sentient API key
-SENTIENT_API_KEY = ""
+SENTIENT_API_KEY = os.getenv("MY_UNIQUE_API_KEY")
 
 # Default agent configurations
 AGENT_CONFIGS = {
     "cot": {
         "wheel_path": "./src/werewolf_agents/cot_sample/dist/chagent-0.1.0-py3-none-any.whl",
-        "module_path": "Chagent.agent.main",
+        "module_path": "agent/cot_agent.py",
         "config_path": "./src/werewolf_agents/cot_sample/config.yaml",
         "agent_class": "CoTAgent"
     },
     "autogen": {
         "wheel_path": "./src/werewolf_agents/autogen_sample/dist/autogenwolf-0.0.1-py3-none-any.whl",
-        "module_path": "autogenwolf.agent.main",
+        "module_path": "agent/single_agent.py",
         "config_path": "./src/werewolf_agents/autogen_sample/config.yaml",
-        "agent_class": "FunWerewolfAgent"
+        "agent_class": "WerewolfAgent"
     },
     "simple": {
         "wheel_path": "./src/werewolf_agents/simple_sample/dist/simplewolf-0.0.1-py3-none-any.whl",
-        "module_path": "simplewolf.agent.main",
+        "module_path": "agent/super_simple.py",
         "config_path": "./src/werewolf_agents/simple_sample/config.yaml",
         "agent_class": "SimpleReactiveAgent"
     }
