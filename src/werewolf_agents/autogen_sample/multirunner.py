@@ -33,7 +33,7 @@ def run_multiple_games(num_games: int, port: int = 8008, results_dir: str = "gam
                 player_name="James",  # select a name for your agent
                 agent_wheel_path="/Users/btsfinch/final-werewolf-template/werewolf-template/src/werewolf_agents/autogen_sample/dist/james-0.0.1-py3-none-any.whl",  # update wheel file path
                 module_path="agent/single_agent.py",
-                agent_class_name="FunWerewolfAgent", # update agent class name if you changed it
+                agent_class_name="WerewolfAgent", # update agent class name if you changed it
                 agent_config_file_path="config.yaml"
             )
             players_sentient_llm_api_keys = [os.getenv("MY_UNIQUE_API_KEY")] #here you can add you api key directly into this list "sk-yourapikey" replacing os.getenv("MY_UNIQUE_API_KEY")
