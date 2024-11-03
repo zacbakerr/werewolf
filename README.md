@@ -14,8 +14,7 @@ How to play werewolf if you don't remember: https://www.youtube.com/watch?v=dd2s
 
 API Keys: your team should have recieved by email.
 
-### 1. Fork and Clone Repo and set up venv:
-(To clone directly):
+### 1. Use Template / Clone Repo and set up venv:
 ```
 git clone https://github.com/sentient-agi/werewolf-template.git
 ```
