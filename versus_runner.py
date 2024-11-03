@@ -4,22 +4,36 @@ import os
 from typing import Dict, List
 import random
 
+# Example custom configuration 
+# The following is the distribution of roles for the game
+# You can change the distribution of roles to test different configurations
+
+custom_distribution = {
+    "wolves": {"agent_type": "cot", "count": 2},
+    "villagers": {"agent_type": "autogen", "count": 4},
+    "seer": {"agent_type": "simple", "count": 1},
+    "doctor": {"agent_type": "simple", "count": 1}
+}
+
+# Your Sentient API key
+SENTIENT_API_KEY = "sk-0WwLjWsBIi3jdzEenjeV-w"
+
 # Default agent configurations
 AGENT_CONFIGS = {
     "cot": {
-        "wheel_path": "src/werewolf_agents/cot_sample/dist/cot_agent.whl",
+        "wheel_path": "src/werewolf_agents/cot_sample/dist/chagent-0.1.0-py3-none-any.whl",
         "module_path": "src.werewolf_agents.cot_sample.agent.main",
         "config_path": "src/werewolf_agents/cot_sample/config.yaml",
         "agent_class": "CoTAgent"
     },
     "autogen": {
-        "wheel_path": "src/werewolf_agents/autogen_sample/dist/autogen_agent.whl",
+        "wheel_path": "src/werewolf_agents/autogen_sample/dist/james-0.0.1-py3-none-any.whl",
         "module_path": "src.werewolf_agents.autogen_sample.agent.main",
         "config_path": "src/werewolf_agents/autogen_sample/config.yaml",
         "agent_class": "FunWerewolfAgent"
     },
     "simple": {
-        "wheel_path": "src/werewolf_agents/simple_sample/dist/simple_agent.whl",
+        "wheel_path": "src/werewolf_agents/simple_sample/dist/james-0.0.1-py3-none-any.whl",
         "module_path": "src.werewolf_agents.simple_sample.agent.main",
         "config_path": "src/werewolf_agents/simple_sample/config.yaml",
         "agent_class": "SimpleReactiveAgent"
@@ -78,17 +92,11 @@ def create_game_config(
 
     return your_agents, player_roles
 
-# Example custom configuration (optional)
-custom_distribution = {
-    "wolves": {"agent_type": "cot", "count": 2},
-    "villagers": {"agent_type": "autogen", "count": 4},
-    "seer": {"agent_type": "simple", "count": 1},
-    "doctor": {"agent_type": "simple", "count": 1}
-}
+
 
 # Create game configuration (using either default or custom)
 your_agents, player_roles = create_game_config(
-    # role_distribution=custom_distribution  # Uncomment to use custom distribution
+    role_distribution=custom_distribution  # Uncomment to use custom distribution
 )
 
 # Run the game
@@ -96,7 +104,7 @@ runner = WerewolfCampaignActivityRunner(com_server_port=8008)
 
 game_result = runner.run_with_your_agents(
     your_agents,
-    players_sentient_llm_api_keys=["sk-k_kwMIIjKhlvd31zSLVQGw"],
+    players_sentient_llm_api_keys=[SENTIENT_API_KEY],
     path_to_final_transcript_dump="transcript",
     player_roles=player_roles,
     force_rebuild_agent_images=False
@@ -107,6 +115,7 @@ print(f"Activity completed with ID: {activity_id}")
 # print game result into log file
 with open("game_result_{0}.log".format(activity_id), "w") as f:
     f.write(str(game_result))
+    f.write(f"\nPlayer Classes: {custom_distribution}")
 
 reorg_files("transcript", "game_result_{0}.log".format(activity_id))
 
