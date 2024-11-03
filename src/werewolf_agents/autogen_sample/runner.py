@@ -26,7 +26,7 @@ game_results = runner.run_locally(
     agent_config,
     players_sentient_llm_api_keys,
     path_to_final_transcript_dump="transcripts",
-    force_rebuild_agent_image=False
+    force_rebuild_agent_image=True
 )
 
 # Save the game results to a JSON file in game_results directory
