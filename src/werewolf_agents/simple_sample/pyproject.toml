@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "james"
+name = "simplewolf"
 version = "0.0.1"
 description = "A description of your project"
 authors = ["bond <your@email.com>"]  # Add your name and email here

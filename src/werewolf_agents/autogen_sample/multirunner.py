@@ -32,7 +32,7 @@ def run_multiple_games(num_games: int, port: int = 8008, results_dir: str = "gam
             agent_config = PlayerAgentConfig(
                 player_name="James",  # select a name for your agent
                 agent_wheel_path="/Users/btsfinch/final-werewolf-template/werewolf-template/src/werewolf_agents/autogen_sample/dist/james-0.0.1-py3-none-any.whl",  # update wheel file path
-                module_path="agent/autogen_single.py",
+                module_path="agent/main.py",
                 agent_class_name="FunWerewolfAgent", # update agent class name if you changed it
                 agent_config_file_path="config.yaml"
             )

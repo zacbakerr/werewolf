@@ -4,48 +4,44 @@ import os
 from typing import Dict, List
 import random
 
-# Example custom configuration 
 # The following is the distribution of roles for the game
 # You can change the distribution of roles to test different configurations
+# By default, we have 2 wolves, 4 villagers, 1 seer, and 1 doctor
+# the wolves are controlled by the CoT agent
+# the villagers are controlled by the Autogen agent
+# the seer and doctor are controlled by the Simple agent
+# You can change this by adding any combination of new agents and players
 
-custom_distribution = {
-    "wolves": {"agent_type": "cot", "count": 2},
-    "villagers": {"agent_type": "autogen", "count": 4},
+# Default role distribution
+DEFAULT_ROLE_DISTRIBUTION = {
+    "wolf": {"agent_type": "cot", "count": 2},
+    "villager": {"agent_type": "autogen", "count": 4},
     "seer": {"agent_type": "simple", "count": 1},
     "doctor": {"agent_type": "simple", "count": 1}
 }
-
 # Your Sentient API key
 SENTIENT_API_KEY = "sk-0WwLjWsBIi3jdzEenjeV-w"
 
 # Default agent configurations
 AGENT_CONFIGS = {
     "cot": {
-        "wheel_path": "src/werewolf_agents/cot_sample/dist/chagent-0.1.0-py3-none-any.whl",
-        "module_path": "src.werewolf_agents.cot_sample.agent.main",
-        "config_path": "src/werewolf_agents/cot_sample/config.yaml",
+        "wheel_path": "./src/werewolf_agents/cot_sample/dist/chagent-0.1.0-py3-none-any.whl",
+        "module_path": "Chagent.agent.main",
+        "config_path": "./src/werewolf_agents/cot_sample/config.yaml",
         "agent_class": "CoTAgent"
     },
     "autogen": {
-        "wheel_path": "src/werewolf_agents/autogen_sample/dist/james-0.0.1-py3-none-any.whl",
-        "module_path": "src.werewolf_agents.autogen_sample.agent.main",
-        "config_path": "src/werewolf_agents/autogen_sample/config.yaml",
+        "wheel_path": "./src/werewolf_agents/autogen_sample/dist/autogenwolf-0.0.1-py3-none-any.whl",
+        "module_path": "autogenwolf.agent.main",
+        "config_path": "./src/werewolf_agents/autogen_sample/config.yaml",
         "agent_class": "FunWerewolfAgent"
     },
     "simple": {
-        "wheel_path": "src/werewolf_agents/simple_sample/dist/james-0.0.1-py3-none-any.whl",
-        "module_path": "src.werewolf_agents.simple_sample.agent.main",
-        "config_path": "src/werewolf_agents/simple_sample/config.yaml",
+        "wheel_path": "./src/werewolf_agents/simple_sample/dist/simplewolf-0.0.1-py3-none-any.whl",
+        "module_path": "simplewolf.agent.main",
+        "config_path": "./src/werewolf_agents/simple_sample/config.yaml",
         "agent_class": "SimpleReactiveAgent"
     }
-}
-
-# Default role distribution
-DEFAULT_ROLE_DISTRIBUTION = {
-    "wolves": {"agent_type": "cot", "count": 2},
-    "villagers": {"agent_type": "autogen", "count": 4},
-    "seer": {"agent_type": "simple", "count": 1},
-    "doctor": {"agent_type": "simple", "count": 1}
 }
 
 def create_game_config(
@@ -65,8 +61,9 @@ def create_game_config(
 
     # Create role mapping
     roles = []
+    print(role_distribution)
     for role_type, config in role_distribution.items():
-        role_enum = getattr(SentientWerewolfRoles, role_type.upper().rstrip('s'))
+        role_enum = getattr(SentientWerewolfRoles, role_type.upper())
         roles.extend([role_enum] * config["count"])
 
     # Shuffle roles for all names
@@ -96,7 +93,7 @@ def create_game_config(
 
 # Create game configuration (using either default or custom)
 your_agents, player_roles = create_game_config(
-    role_distribution=custom_distribution  # Uncomment to use custom distribution
+    role_distribution=DEFAULT_ROLE_DISTRIBUTION
 )
 
 # Run the game
@@ -115,7 +112,7 @@ print(f"Activity completed with ID: {activity_id}")
 # print game result into log file
 with open("game_result_{0}.log".format(activity_id), "w") as f:
     f.write(str(game_result))
-    f.write(f"\nPlayer Classes: {custom_distribution}")
+    f.write(f"\nPlayer Classes: {DEFAULT_ROLE_DISTRIBUTION}")
 
 reorg_files("transcript", "game_result_{0}.log".format(activity_id))
 
