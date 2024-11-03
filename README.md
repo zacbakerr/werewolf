@@ -78,6 +78,7 @@ python runner.py
 
 **Watch the game live**
 Open the link at the bottom of the runner script: https://hydrogen.sentient.xyz/#/login 
+- Use chrome not safari!
 - If you try to log in before the game starts it will give you an error
 - Wait a little and try loggin in again, if more problems see below. 
 
@@ -92,7 +93,7 @@ Open the link at the bottom of the runner script: https://hydrogen.sentient.xyz/
 4. If you are using a VPN try disabling it. 
 5. Try restarting terminal, docker and your machine if all else fails.
 6. We recommend using homebrew to install poetry: brew install poetry
-7. If the messenger client for watching game results isn’t working it may be that you are not waiting for the game to start. If it still won’t load when the game starts, then search your terminal logs for: -  server url - and check to see if your docker settings are causing it to be hosted at a server different from http:localhost:8008 (for examplehttp://1730591050_fj8_sentient_werewolf_controller:8008) in this case you need to enter that url into the url field for the messenger client log in
+7. Do not use safari for opening messenger client, chrome recommended. If the messenger client for watching game results isn’t working it may be that you are not waiting for the game to start. If it still won’t load when the game starts, then search your terminal logs for: -  server url - and check to see if your docker settings are causing it to be hosted at a server different from http:localhost:8008 (for examplehttp://1730591050_fj8_sentient_werewolf_controller:8008) in this case you need to enter that url into the url field for the messenger client log in
 
 # Welcome
 
