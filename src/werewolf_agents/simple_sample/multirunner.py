@@ -1,3 +1,9 @@
+##################################################################################
+# This is file for running multiple games back to back and save to game_results
+# Note if you set force_rebuild_agent_image=False, and specify a unique port
+# You can run several multirunner.py instances at the same time in dif. terminals
+###################################################################################
+
 import os
 import json
 import time
