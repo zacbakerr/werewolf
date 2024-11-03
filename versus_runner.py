@@ -20,7 +20,7 @@ DEFAULT_ROLE_DISTRIBUTION = {
     "doctor": {"agent_type": "simple", "count": 1}
 }
 # Your Sentient API key
-SENTIENT_API_KEY = "sk-0WwLjWsBIi3jdzEenjeV-w"
+SENTIENT_API_KEY = ""
 
 # Default agent configurations
 AGENT_CONFIGS = {
