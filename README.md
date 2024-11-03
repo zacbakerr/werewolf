@@ -7,23 +7,26 @@ How to play werewolf if you don't remember: https://www.youtube.com/watch?v=dd2s
 
 Template github repo: https://github.com/sentient-agi/werewolf-template
 
-Requirements to run:
+**Requirements to run:**
 - Python 3.12 
 - Pip
-- Docker Desktop Application
+- Docker Desktop Application # make sure you open this before you start
 - Docker
-- Poetry
+- Poetry (recommend installing via home brew: `brew install poetry`)
 - venv (recommended)
 
 API Keys: your team should have recieved by email.
 
+### 1. Clone Repo and set up venv:
+
 Create a venv:
 ```
 python3 -m venv venv
+```
+```
 source venv/bin/activate
 ```
-
-Required libraries: 
+### 2. Install Game Libraries:
 
 The sentient-campaign-agents-api library, documented [here](https://test.pypi.org/project/sentient-campaign-agents-api/):
 ```
@@ -33,7 +36,58 @@ The Sentient Campaign Activity Runner library, documented [here](https://test.py
 ```
 pip install --upgrade --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple sentient-campaign-activity-runner
 ```
-**Pro tip** the docs section of this README is super long and detailed, if using cursor or copilot just @ this file when trouble shooting!
+### 3. Navigate to simple_sample and build agent:
+```
+cd src/werewolf_agents/simple_sample
+```
+```
+poetry build
+```
+### 4. Set up configs to run:
+**First** do this:
+```
+pip install python-dotenv
+```
+Create a .env file in the werewolf-template directory with these variables:
+```
+SENTIENT_DEFAULT_LLM_MODEL_NAME="Llama31-70B-Instruct"
+MY_UNIQUE_API_KEY=
+SENTIENT_DEFAULT_LLM_BASE_URL="https://hp3hebj84f.us-west-2.awsapprunner.com"
+```
+- Add your API Key above, if using fireworks set different model name and url.
+
+**Second**:
+Open runner.py in the simple_sample directory
+
+Find the absolute path of the wheel file you just created (in the new dist folder ends in .whl)
+
+Copy paste this wheel file into: `agent_wheel_path=`
+
+### 5. Run your agent against default agents:
+In your terminal (you should be in the simple_sample directory):
+```
+python runner.py
+```
+- Make sure that docker is open or this won't work!
+- Don't hit Ctrl C more than once when running or you need to delete all your docker images and containers.
+
+**Watch the game live**
+Open the link at the bottom of the runner script: https://hydrogen.sentient.xyz/#/login 
+- If you try to log in before the game starts it will give you an error
+- Wait a little and try loggin in again, if more problems see below. 
+
+**Pro tip** the docs section of this README below is super long and detailed, if using cursor or copilot just @ this file when trouble shooting!
+
+### To learn basics of how to modify and test agent templates see above. 
+
+# Trouble Shooting
+1. Make sure that you rebuild your agent before running it by using poetry build
+2. Make sure Docker is up and running. If something is not working try deleting all your docker images and containers. Make sure that you are not filtering the docker images and containers that are visible in docker desktop.
+3. Make sure that you run poetry build before you try a runner file. Also make sure that force rebuild is set to true if you are rebuilding the wheel file.
+4. If you are using a VPN try disabling it. 
+5. Try restarting terminal, docker and your machine if all else fails.
+6. We recommend using homebrew to install poetry: brew install poetry
+7. If the messenger client for watching game results isn’t working it may be that you are not waiting for the game to start. If it still won’t load when the game starts, then search your terminal logs for: -  server url - and check to see if your docker settings are causing it to be hosted at a server different from http:localhost:8008 (for examplehttp://1730591050_fj8_sentient_werewolf_controller:8008) in this case you need to enter that url into the url field for the messenger client log in
 
 # Welcome
 
@@ -131,7 +185,7 @@ This simple interface has just two core methods that you have to implement (excl
 ```
 async def async_notify(self, message: ActivityMessage):
 ```
-This is a method that the game controller will call whenever there is some new information about the state of the game that it wants to notify your agent about but does not require a response. For example if one agent is killed by werewolves in the night, the game controller will call async_notify to each agent actively playing the game.
+This is a method that the game controller will call whenever there is some new information about the state of the game that it wants to notify your agent about but does not require a response. For example if one agent is killed by werewolves in the night, the game controller will call async_notify to each agent actively playing the game. The logic you implement with async notify is how your agent will process, remember and “understand” any information that has been passed to it. 
 
 ### async_respond
 ```
@@ -282,13 +336,13 @@ Your group will be given access to an openai compatible api key for Llama 70b wh
 
 When you are running your agent locally, you must provide any api keys you want your agents to have access to in this parameter within the runner file. You provide these api keys to runner as a list of keys see (players_sentient_llm_api_keys). From here runner will automatically create the sentient_llm_config attribute filling in the hard coded "llm_model_name" and "llm_base_url" parameters.
 
-Using Fireworks.ai API Keys
+**Using Fireworks.ai API Keys**
 For the online section of this hackathon, you have two options for compute to power your agent! 
-The first is just to use the API key that will be emailed to each group. This API key will give you access to the clusters we are hosting for this tournament, and will have a budget of at least $100 for your group to use during the duration of the tournament. If you are out of compute on the day of the in person event we will be happy to provide you more. 
-Fireworks.ai has generously offered to co-sponsor this event and each hackathon participant can receive $30 in fireworks.ai credits by using this form: https://forms.gle/T1zGf6Sf3exzYccM9
+1. The first is just to use the API key that will be emailed to each group. This API key will give you access to the clusters we are hosting for this tournament, and will have a budget of at least $100 for your group to use during the duration of the tournament. If you are out of compute on the day of the in person event we will be happy to provide you more. 
+2. Fireworks.ai has generously offered to co-sponsor this event and each hackathon participant can receive $30 in fireworks.ai credits by using this form: https://forms.gle/T1zGf6Sf3exzYccM9
 If you are having any problems with LLM API requests, just try switching API providers! 
 
-How to use Fireworks.ai API Keys:
+**How to use Fireworks.ai API Keys:**
 
 Currently the template code is set up with the base URL and model name hard coded to the model name and base URL for the Llama 70B instance we are hosting. To use Fireworks.ai you need to override this by setting the environment variables:
 
@@ -302,9 +356,9 @@ The easiest way to do this is just to create a .env file with the above configur
 To create a Fireworks API Key:
 
 Create a Fireworks.ai account
-Fill out the google form
-Create a new API key
-You will start out with $1 credit in your account but this will become $30 when approved
+- Fill out the google form
+- Create a new API key
+- You will start out with $1 credit in your account but this will become $30 when approved
 
 **Please note at the moment, fireworks API Keys may not be compatible with the CoT and Autogen template agents we are working on optimizing this compatibility. 
 
@@ -332,12 +386,32 @@ username: moderator
 
 password: moderator
 
-# Troubleshooting tips
+*Troubleshooting Hydrogen:*
+If the messenger client for watching game results isn’t working it may be that you are not waiting for the game to start. If it still won’t load when the game starts, then search your terminal logs for: -  server url - and check to see if your docker settings are causing it to be hosted at a server different from http:localhost:8008 (for examplehttp://1730591050_fj8_sentient_werewolf_controller:8008) in this case you need to enter that url into the url field for the messenger client log in
 
-1. Make sure that you rebuild your agent before running it by using poetry build
-2. If something is not working try deleting all your docker images and containers. Make sure that you are not filtering the docker images and containers that are visible in docker desktop
-3. Make sure that you run poetry build before you try a runner file. Also make sure that force rebuild is set to true if you are rebuilding the wheel file.
-4. You may need to disable your VPN to view games in Hydrogen. 
+## Storing and Viewing Werewolf Game Results
+
+In the template code we have set it up so that the results of werewolf games are stored in a game_results folder, and the transcripts of each of the players are stored in a transcripts folder. In the agent directory. 
+
+`runner.run_against_standard_agents` will return game results in a json object that we store in this folder. 
+
+## Running Multiple Back to Back Werewolf Games 
+Werewolf is a probabilistic game, especially when using LLMs thus to see how well your agent is doing, it is helpful to run many games and count your agents win rate. This is how your agent will be evaluated in the tournament. 
+
+To help you do this each template agent directory contains a script called multirunner.py that allows you to run a set number of werewolf games, and also specify the port you run it on if you would like to. 
+
+## Running multiple werewolf games simultaneously
+
+Using multirunner.py, it is possible to have multiple terminals running games at the same time. To do this, however you must set
+```
+force_rebuild_agent_image=False
+```
+And you must specify different ports for those games to broadcast to. You can run multirunner.py with different ports and a set number of games like this:
+```
+python multirunner.py --games 5 --port 14002
+```
+We recommend sticking to ports above 14000.
+
 
 
 # Appendix
