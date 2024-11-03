@@ -1,3 +1,8 @@
+########################################################################
+# This is runner file for running different agents against one another
+#########################################################################
+
+
 from sentient_campaign.activity_runner.runner import WerewolfCampaignActivityRunner, PlayerAgentConfig, SentientWerewolfRoles
 from transcript.reorg_files import reorg_files
 import os
