@@ -16,7 +16,7 @@ agent_config = PlayerAgentConfig(
     player_name="James", # select a name for your agent
                 
     #TODO: IMPORTANT!! After building your agent for the first time, you must update this path:
-    agent_wheel_path="/Users/btsfinch/final-werewolf-template/werewolf-template/src/werewolf_agents/simple_sample/dist/james-0.0.1-py3-none-any.whl", 
+    agent_wheel_path="/Users/btsfinch/hope_temp_ww/werewolf-template/src/werewolf_agents/simple_sample/dist/simplewolf-0.0.1-py3-none-any.whl", 
     module_path="agent/super_simple.py",
     agent_class_name="SimpleReactiveAgent",
     agent_config_file_path="config.yaml" 
@@ -41,3 +41,5 @@ print(f"Game results saved to: {results_file}")
 # Use this URL to watch the game live, please wait till the game gets going, otherwise it will say incorrect credentials
 # Safari not supported, use Chrome. 
 # URL to hosted game messenger client: https://hydrogen.sentient.xyz/#/login
+
+# IF THIS MESSENGER CLIENT IS NOT WORKING, MAKE SURE YOU ARE USING SAFARI, AND WAITING. IF STILL NOT WORKING SEE DOCS.

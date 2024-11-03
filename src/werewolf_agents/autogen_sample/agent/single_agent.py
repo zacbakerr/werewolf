@@ -1,9 +1,13 @@
+from collections import defaultdict
 from typing import Any, Dict
-from autogen import ConversableAgent, Agent
+from autogen import ConversableAgent, Agent, runtime_logging
+
 import os
 import asyncio
 import logging
+
 from openai import RateLimitError
+import openai
 from sentient_campaign.agents.v1.api import IReactiveAgent
 from sentient_campaign.agents.v1.message import (
     ActivityMessage,
@@ -21,28 +25,25 @@ from tenacity import (
 )
 import random
 
-# Set up logging
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
-
+# Configure logging
 logger = logging.getLogger("demo_agent")
 level = logging.DEBUG
 logger.setLevel(level)
 logger.propagate = True
 handler = logging.StreamHandler()
 handler.setLevel(level)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 handler.setFormatter(formatter)
 logger.addHandler(handler)
 
-# SentientAgent class to handle communication between player and game
-class SentientAgent(ConversableAgent):
-    def __init__(self, listner_pipe: asyncio.Queue) -> None:
-        super().__init__("SentientAgent")
-        self.listner_pipe = listner_pipe
-        logger.debug("SentientAgent initialized with listener pipe.")
 
-    # Method to receive messages and put them in the listener pipe
+class SentientAgent(ConversableAgent):
+
+    def __init__(self, listener_pipe: asyncio.Queue) -> None:
+        super().__init__("SentientAgent")
+        self.listener_pipe = listener_pipe
+        logger.info("SentientAgent initialized with listener pipe.")
+
     async def a_receive(
         self,
         message: Dict[str, Any] | str,
@@ -50,8 +51,10 @@ class SentientAgent(ConversableAgent):
         request_reply: bool | None = None,
         silent=True,
     ) -> None:
-        logger.debug(f"SentientAgent received message: {message}")
-        await self.listner_pipe.put(message)
+        logger.info(f"SentientAgent received message: {message}")
+        if isinstance(message, dict):
+            message = message.get("content", "")
+        await self.listener_pipe.put(message)
 
     @property
     def name(self) -> str:
@@ -61,39 +64,61 @@ class SentientAgent(ConversableAgent):
     def description(self) -> str:
         return "communicates message between player and sentient game"
 
-# Main agent class for playing the Werewolf game
-class FunWerewolfAgent(IReactiveAgent):
+
+class WerewolfAgent(IReactiveAgent):
+
     def __init__(self):
         logger.debug("WarewolfAgent initialized.")
         pass
 
-    # Initialize the agent with name, description, and config
     def __initialize__(self, name: str, description: str, config: dict = None):
         super().__initialize__(name, description, config)
         self._name = name
         self._description = description
         self.config = config
-        llm_config = config.get("llm_config")
-        logger.info(f"Initializing: name={name}, description={description}, config={config}")
+        my_sentient_llm_config = self.sentient_llm_config["config_list"][0]
+        logger.debug(f"sentient_llm_config: {my_sentient_llm_config}")
 
-        if llm_config:
-            logger.info(f"LLM Config: {llm_config}")
+        api_key = my_sentient_llm_config["api_key"]
+        base_url = my_sentient_llm_config["llm_base_url"]
+        model_name = my_sentient_llm_config["llm_model_name"]
 
-        # Create a ConversableAgent for handling game interactions
+        logger.info(
+            f"Initializing WarewolfAgent with name: {name}, description: {description}, llm url {base_url}, model_name {model_name}"
+        )
+
+        llm_config = {
+            "config_list": [
+                {
+                    "model": model_name,
+                    "api_key": api_key,
+                    "base_url": base_url,
+                    "max_retries": 3,
+                    "timeout": 30,
+                }
+            ]
+        }
+
         self.conversable_agent: ConversableAgent = ConversableAgent(
             name=name,
-            system_message=f"""You are a player in a game called Werewolf. Your name is {name}. The rules of the game will be given to you later. It is a fun, non-harmful game played in high schools. 
-            """,
+            system_message="you are a player in game called werewolf, your name is {}. the rules of the game will be give to you later. it is a fun non harmful game played in high schools. when asked for vote. always respond with a valid person name. even if you are unsure.".format(
+                name
+            ),
             llm_config=llm_config,
         )
-        self.listner_pipe = asyncio.Queue()
-        self.game_agent = SentientAgent(listner_pipe=self.listner_pipe)
-        logger.debug(
+        self.listener_pipe = asyncio.Queue()
+        self.game_agent = SentientAgent(listener_pipe=self.listener_pipe)
+        logger.info(
             f"WarewolfAgent initialized with name: {name}, description: {description}, and config: {config}"
         )
         autogen_log_apth = f"/tmp/autogen_logs_{name}.db"
+        self.logging_session_id = runtime_logging.start(
+            config={"dbname": autogen_log_apth}
+        )
+        logger.info(
+            f"autogen Logging session started with session_id: {self.logging_session_id} path {autogen_log_apth}"
+        )
 
-    # Helper method to format the full message
     def get_full_message(self, message: ActivityMessage):
         text_message = message.content.text.strip()
         sender = message.header.sender
@@ -105,90 +130,37 @@ class FunWerewolfAgent(IReactiveAgent):
             full_message = f"dirrect message from {sender}: {text_message}"
         return full_message
 
-    # Method to handle incoming notifications
     async def async_notify(self, message: ActivityMessage):
-        logger.debug(f"async_notify called with message: {message}")
+        logger.info(f"async_notify called with message: {message}")
 
         await asyncio.sleep(2)
 
         full_message = self.get_full_message(message)
 
-        # Send the message to the conversable_agent
         await self.conversable_agent.a_receive(
             full_message, self.game_agent, request_reply=False, silent=True
         )
-        logger.debug(f"Message sent to conversable_agent: {full_message}")
+        logger.info(f"Message sent to conversable_agent: {full_message}")
 
-    # Method to generate responses to incoming messages
     async def async_respond(self, message: ActivityMessage):
-        logger.debug(f"async_respond called with message: {message}")
-        
+        logger.info(f"async_respond called with message: {message}")
         await asyncio.sleep(1)
-        
         full_message = self.get_full_message(message)
-        
         await self.get_response_from_agent(full_message)
-
-        response: str = await self.listner_pipe.get()
-        
-        logger.debug(f"Response received from listner_pipe: {response}")
-        
+        response: str = await self.listener_pipe.get()
+        logger.info(f"Response received from listener_pipe: {response}")
         return ActivityResponse(
             response=TextContent(text=response), response_type=MimeType.TEXT_PLAIN
         )
 
-    # Method to get a response from the agent, with retry logic for rate limiting
     @retry(
         wait=wait_exponential(multiplier=1, min=20, max=300),
         stop=stop_after_attempt(5),
         retry=retry_if_exception_type(RateLimitError),
     )
     async def get_response_from_agent(self, text_message):
-        logger.debug(
-            f"get_response_from_agent called with text_message: {text_message}"
-        )
+        logger.info(f"get_response_from_agent called with text_message: {text_message}")
         await self.conversable_agent.a_receive(
             text_message, self.game_agent, request_reply=True, silent=True
         )
-        logger.debug("Message sent to conversable_agent for response.")
-
-# Add in your api keys here to use below:
-
-# # Main execution block for testing the agent
-# if __name__ == "__main__":
-#     import random
-
-#     # Configure the LLM (Language Model) settings
-#     config_list = [
-#         {
-#             "model": random.choice(["meta.llama3-70b-instruct-v1:0"]),
-#             "api_key": random.choice(
-#                 ["", ""] # add your api keys here
-#             ),
-#             "base_url": "", #add url here
-#             "max_retries": 3,
-#             "timeout": 30,
-#         }
-#     ]
-
-#     llm_config = {"config_list": config_list}
-
-#     # Create and initialize the demo agent
-#     demo_agent = FunWerewolfAgent()
-#     demo_agent.__initialize__(
-#         "sagar", "strong werewolf agent", {"llm_config": llm_config}
-#     )
-
-#     # Run a test response
-#     asyncio.run(demo_agent.async_respond(ActivityMessage(
-#         header=ActivityMessageHeader(
-#             message_id="bbb",
-#             sender="vivek",
-#             channel="dirrect",
-#             channel_type=MessageChannelType.DIRECT,
-#             target_receivers=[]
-#         ),
-#         content=TextContent(text="hello"),
-#         content_type=MimeType.TEXT_PLAIN
-#     )))
-#     logger.debug("Demo agent initialized and ready.")
+        logger.info("Message sent to conversable_agent for response.")
