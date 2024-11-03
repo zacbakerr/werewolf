@@ -1,11 +1,8 @@
 # Quick Start
 
-See quick start video in AGI-thon docs @ https://drive.google.com/file/d/1RbkLeQMro7Wtq3ct_g000eFd8Je4eaCt/view?usp=sharing
-https://openagi.discourse.group/t/agi-thon-werewolf-agents-tournament-home/2463
+See quick start video and AGI-thon home page with the latest docs: https://www.youtube.com/watch?v=EVcdfNHPyMg
 
 How to play werewolf if you don't remember: https://www.youtube.com/watch?v=dd2sOmZUBmM
-
-Template github repo: https://github.com/sentient-agi/werewolf-template
 
 **Requirements to run:**
 - Python 3.12 
