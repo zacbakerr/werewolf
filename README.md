@@ -78,7 +78,7 @@ Open the link at the bottom of the runner script: https://hydrogen.sentient.xyz/
 
 **Pro tip** the docs section of this README below is super long and detailed, if using cursor or copilot just @ this file when trouble shooting!
 
-### To learn basics of how to modify and test agent templates see above. 
+**To learn basics of how to modify and test agent templates watch tutorial above** 
 
 # Trouble Shooting
 1. Make sure that you rebuild your agent before running it by using poetry build
