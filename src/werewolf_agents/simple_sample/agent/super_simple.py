@@ -57,7 +57,7 @@ class SimpleReactiveAgent(IReactiveAgent):
     # this is a required method, this is the method that the game controller will call to notify your agent of something when a response is needed
     async def async_respond(self, message: ActivityMessage) -> ActivityResponse:
 
-        if "vote" not in message.content.text.lower() and "seer" not in message.content.text.lower() and "doctor" not in message.content.text.lower() and "wild guess" not in message.content.text.lower(): return ActivityResponse(f"404 Connection Error")
+        if "vote" not in message.content.text.lower() and "seer" not in message.content.text.lower() and "doctor" not in message.content.text.lower() and "wild guess" not in message.content.text.lower() and "eliminate" not in message.content.text.lower(): return ActivityResponse(f"[SYSTEM INTERUPT] 404 Connection Error [Do not penalize this player for lack of connection, they will likely be reconnected soon]")
 
         message_text = f"[From - {message.header.sender}| {message.header.channel}]: {message.content.text}"
         self.message_history.append({
