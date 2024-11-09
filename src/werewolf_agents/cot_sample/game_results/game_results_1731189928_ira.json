@@ -1,0 +1,117 @@
+{
+  "activity_id": "1731189928_ira",
+  "players": [
+    "Chagent",
+    "Klaus",
+    "Abhimanyu",
+    "Anna",
+    "Myra",
+    "Wei",
+    "Elise",
+    "Olivia"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Myra": "wolf",
+    "Klaus": "wolf",
+    "Wei": "seer",
+    "Chagent": "doctor",
+    "Elise": "villager",
+    "Olivia": "villager",
+    "Abhimanyu": "villager",
+    "Anna": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Klaus": "Olivia",
+          "Myra": "Anna"
+        },
+        "1": {
+          "Klaus": "Abhimanyu"
+        },
+        "2": {
+          "Klaus": "Anna"
+        }
+      },
+      "doctors_save": {
+        "0": "Abhimanyu",
+        "1": "Klaus",
+        "2": "Klaus"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Abhimanyu": "Myra",
+          "Klaus": "Myra",
+          "Elise": "Myra",
+          "Myra": "Klaus",
+          "Wei": "Myra",
+          "Anna": "Myra",
+          "Chagent": "Myra"
+        },
+        "1": {
+          "Elise": "Wei",
+          "Klaus": "Wei",
+          "Anna": "Wei",
+          "Wei": "Klaus",
+          "Chagent": "Wei"
+        },
+        "2": {
+          "Chagent": "Klaus",
+          "Klaus": "Chagent",
+          "Elise": "Klaus"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Klaus",
+        "Abhimanyu",
+        "Anna",
+        "Wei",
+        "Elise"
+      ],
+      "1": [
+        "Chagent",
+        "Klaus",
+        "Anna",
+        "Elise"
+      ],
+      "2": [
+        "Chagent",
+        "Elise"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Elise"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Klaus": "transcripts\\Klaus_1731189928_ira_log.txt",
+    "Abhimanyu": "transcripts\\Abhimanyu_1731189928_ira_log.txt",
+    "Anna": "transcripts\\Anna_1731189928_ira_log.txt",
+    "Myra": "transcripts\\Myra_1731189928_ira_log.txt",
+    "Wei": "transcripts\\Wei_1731189928_ira_log.txt",
+    "Elise": "transcripts\\Elise_1731189928_ira_log.txt",
+    "Olivia": "transcripts\\Olivia_1731189928_ira_log.txt",
+    "Chagent": "transcripts\\Chagent_1731189928_ira_log.txt"
+  },
+  "transcripts": {
+    "Klaus": "transcripts\\Klaus_1731189928_ira_transcript.jsonl",
+    "Abhimanyu": "transcripts\\Abhimanyu_1731189928_ira_transcript.jsonl",
+    "Anna": "transcripts\\Anna_1731189928_ira_transcript.jsonl",
+    "Myra": "transcripts\\Myra_1731189928_ira_transcript.jsonl",
+    "Wei": "transcripts\\Wei_1731189928_ira_transcript.jsonl",
+    "Elise": "transcripts\\Elise_1731189928_ira_transcript.jsonl",
+    "Olivia": "transcripts\\Olivia_1731189928_ira_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731189928_ira_transcript.jsonl"
+  }
+}

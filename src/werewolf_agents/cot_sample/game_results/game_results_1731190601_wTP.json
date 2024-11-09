@@ -1,0 +1,117 @@
+{
+  "activity_id": "1731190601_wTP",
+  "players": [
+    "Chagent",
+    "Kiara",
+    "Myra",
+    "Elise",
+    "Arjun",
+    "Emily",
+    "Haruto",
+    "Aarav"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Kiara": "wolf",
+    "Haruto": "wolf",
+    "Arjun": "seer",
+    "Chagent": "doctor",
+    "Myra": "villager",
+    "Aarav": "villager",
+    "Elise": "villager",
+    "Emily": "villager"
+  },
+  "success_game_stats": {
+    "winner": "WOLVES",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Kiara": "Chagent",
+          "Haruto": "Chagent"
+        },
+        "1": {
+          "Haruto": "Arjun"
+        },
+        "2": {
+          "Haruto": "Aarav"
+        }
+      },
+      "doctors_save": {
+        "0": "Myra",
+        "1": null,
+        "2": null
+      },
+      "alive_players_votes": {
+        "0": {
+          "Aarav": "Kiara",
+          "Emily": "Kiara",
+          "Haruto": "Emily",
+          "Arjun": "Kiara",
+          "Elise": "Emily",
+          "Kiara": "Emily",
+          "Myra": "Kiara"
+        },
+        "1": {
+          "Aarav": "Elise",
+          "Myra": "Elise",
+          "Emily": "Elise",
+          "Haruto": "Emily",
+          "Elise": "Haruto"
+        },
+        "2": {
+          "Haruto": "Emily",
+          "Myra": "Emily",
+          "Emily": "Haruto"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Myra",
+        "Elise",
+        "Arjun",
+        "Emily",
+        "Haruto",
+        "Aarav"
+      ],
+      "1": [
+        "Myra",
+        "Emily",
+        "Haruto",
+        "Aarav"
+      ],
+      "2": [
+        "Myra",
+        "Haruto"
+      ]
+    },
+    "last_standing_players": [
+      "Myra",
+      "Haruto"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Kiara": "transcripts\\Kiara_1731190601_wTP_log.txt",
+    "Myra": "transcripts\\Myra_1731190601_wTP_log.txt",
+    "Elise": "transcripts\\Elise_1731190601_wTP_log.txt",
+    "Arjun": "transcripts\\Arjun_1731190601_wTP_log.txt",
+    "Emily": "transcripts\\Emily_1731190601_wTP_log.txt",
+    "Haruto": "transcripts\\Haruto_1731190601_wTP_log.txt",
+    "Aarav": "transcripts\\Aarav_1731190601_wTP_log.txt",
+    "Chagent": "transcripts\\Chagent_1731190601_wTP_log.txt"
+  },
+  "transcripts": {
+    "Kiara": "transcripts\\Kiara_1731190601_wTP_transcript.jsonl",
+    "Myra": "transcripts\\Myra_1731190601_wTP_transcript.jsonl",
+    "Elise": "transcripts\\Elise_1731190601_wTP_transcript.jsonl",
+    "Arjun": "transcripts\\Arjun_1731190601_wTP_transcript.jsonl",
+    "Emily": "transcripts\\Emily_1731190601_wTP_transcript.jsonl",
+    "Haruto": "transcripts\\Haruto_1731190601_wTP_transcript.jsonl",
+    "Aarav": "transcripts\\Aarav_1731190601_wTP_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731190601_wTP_transcript.jsonl"
+  }
+}

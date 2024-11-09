@@ -1,0 +1,107 @@
+{
+  "activity_id": "1731191126_5nJ",
+  "players": [
+    "Chagent",
+    "Elise",
+    "Haruto",
+    "Astrid",
+    "Aarav",
+    "Ling",
+    "Michael",
+    "Emily"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Astrid": "wolf",
+    "Michael": "wolf",
+    "Haruto": "seer",
+    "Emily": "doctor",
+    "Aarav": "villager",
+    "Elise": "villager",
+    "Chagent": "villager",
+    "Ling": "villager"
+  },
+  "success_game_stats": {
+    "winner": "WOLVES",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Astrid": "Haruto",
+          "Michael": "Emily"
+        },
+        "1": {
+          "Astrid": "Elise",
+          "Michael": "Emily"
+        }
+      },
+      "doctors_save": {
+        "0": "Michael",
+        "1": "Astrid"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Michael": "Ling",
+          "Elise": "Ling",
+          "Emily": "Ling",
+          "Aarav": "Ling",
+          "Chagent": "Ling",
+          "Astrid": "Ling",
+          "Ling": "Astrid"
+        },
+        "1": {
+          "Aarav": "Chagent",
+          "Astrid": "Michael",
+          "Emily": "Aarav",
+          "Chagent": "Aarav",
+          "Michael": "Aarav"
+        }
+      }
+    },
+    "total_rounds": 2,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Elise",
+        "Astrid",
+        "Aarav",
+        "Michael",
+        "Emily"
+      ],
+      "1": [
+        "Chagent",
+        "Astrid",
+        "Michael",
+        "Emily"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Astrid",
+      "Michael",
+      "Emily"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Elise": "transcripts\\Elise_1731191126_5nJ_log.txt",
+    "Haruto": "transcripts\\Haruto_1731191126_5nJ_log.txt",
+    "Astrid": "transcripts\\Astrid_1731191126_5nJ_log.txt",
+    "Aarav": "transcripts\\Aarav_1731191126_5nJ_log.txt",
+    "Ling": "transcripts\\Ling_1731191126_5nJ_log.txt",
+    "Michael": "transcripts\\Michael_1731191126_5nJ_log.txt",
+    "Emily": "transcripts\\Emily_1731191126_5nJ_log.txt",
+    "Chagent": "transcripts\\Chagent_1731191126_5nJ_log.txt"
+  },
+  "transcripts": {
+    "Elise": "transcripts\\Elise_1731191126_5nJ_transcript.jsonl",
+    "Haruto": "transcripts\\Haruto_1731191126_5nJ_transcript.jsonl",
+    "Astrid": "transcripts\\Astrid_1731191126_5nJ_transcript.jsonl",
+    "Aarav": "transcripts\\Aarav_1731191126_5nJ_transcript.jsonl",
+    "Ling": "transcripts\\Ling_1731191126_5nJ_transcript.jsonl",
+    "Michael": "transcripts\\Michael_1731191126_5nJ_transcript.jsonl",
+    "Emily": "transcripts\\Emily_1731191126_5nJ_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731191126_5nJ_transcript.jsonl"
+  }
+}

@@ -57,6 +57,8 @@ class SimpleReactiveAgent(IReactiveAgent):
     # this is a required method, this is the method that the game controller will call to notify your agent of something when a response is needed
     async def async_respond(self, message: ActivityMessage) -> ActivityResponse:
 
+        if "vote" not in message.content.text.lower() and "seer" not in message.content.text.lower() and "doctor" not in message.content.text.lower() and "wild guess" not in message.content.text.lower(): return ActivityResponse(f"404 Connection Error")
+
         message_text = f"[From - {message.header.sender}| {message.header.channel}]: {message.content.text}"
         self.message_history.append({
             "role": "user",
@@ -76,7 +78,7 @@ class SimpleReactiveAgent(IReactiveAgent):
             "content": assistant_message
         })
         logger.debug(f"Assistant response added to history: {assistant_message}")
-        
+
         return ActivityResponse(response.choices[0].message.content)
 
 # Testing the agent: Make sure to comment out this code when you want to actually run the agent in some games. 

@@ -1,0 +1,118 @@
+{
+  "activity_id": "1731191828_jpq",
+  "players": [
+    "Chagent",
+    "Klaus",
+    "Akira",
+    "Anna",
+    "Myra",
+    "Ling",
+    "Pietro",
+    "Fredrik"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Ling": "wolf",
+    "Chagent": "wolf",
+    "Akira": "seer",
+    "Anna": "doctor",
+    "Fredrik": "villager",
+    "Klaus": "villager",
+    "Pietro": "villager",
+    "Myra": "villager"
+  },
+  "success_game_stats": {
+    "winner": "WOLVES",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Chagent": "Myra",
+          "Ling": "Myra"
+        },
+        "1": {
+          "Chagent": "Fredrik",
+          "Ling": "Fredrik"
+        },
+        "2": {
+          "Chagent": "Anna"
+        }
+      },
+      "doctors_save": {
+        "0": "Akira",
+        "1": "Chagent",
+        "2": "Akira"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Fredrik": "Ling",
+          "Ling": "Klaus",
+          "Klaus": "Pietro",
+          "Chagent": "Pietro",
+          "Anna": "Ling",
+          "Akira": "Fredrik",
+          "Pietro": "Klaus"
+        },
+        "1": {
+          "Akira": "Anna",
+          "Klaus": "Ling",
+          "Chagent": "Ling",
+          "Ling": "Anna",
+          "Anna": "Ling"
+        },
+        "2": {
+          "Akira": "Klaus",
+          "Chagent": "Akira",
+          "Klaus": "Chagent"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Klaus",
+        "Akira",
+        "Anna",
+        "Ling",
+        "Fredrik"
+      ],
+      "1": [
+        "Chagent",
+        "Klaus",
+        "Akira",
+        "Anna"
+      ],
+      "2": [
+        "Chagent",
+        "Akira"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Akira"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Klaus": "transcripts\\Klaus_1731191828_jpq_log.txt",
+    "Akira": "transcripts\\Akira_1731191828_jpq_log.txt",
+    "Anna": "transcripts\\Anna_1731191828_jpq_log.txt",
+    "Myra": "transcripts\\Myra_1731191828_jpq_log.txt",
+    "Ling": "transcripts\\Ling_1731191828_jpq_log.txt",
+    "Pietro": "transcripts\\Pietro_1731191828_jpq_log.txt",
+    "Fredrik": "transcripts\\Fredrik_1731191828_jpq_log.txt",
+    "Chagent": "transcripts\\Chagent_1731191828_jpq_log.txt"
+  },
+  "transcripts": {
+    "Klaus": "transcripts\\Klaus_1731191828_jpq_transcript.jsonl",
+    "Akira": "transcripts\\Akira_1731191828_jpq_transcript.jsonl",
+    "Anna": "transcripts\\Anna_1731191828_jpq_transcript.jsonl",
+    "Myra": "transcripts\\Myra_1731191828_jpq_transcript.jsonl",
+    "Ling": "transcripts\\Ling_1731191828_jpq_transcript.jsonl",
+    "Pietro": "transcripts\\Pietro_1731191828_jpq_transcript.jsonl",
+    "Fredrik": "transcripts\\Fredrik_1731191828_jpq_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731191828_jpq_transcript.jsonl"
+  }
+}

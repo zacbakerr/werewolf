@@ -87,6 +87,7 @@ class CoTAgent(IReactiveAgent):
         self.role = None
 
         self.wolf_discovered = "Incorrect"
+        self.other_wolf = None
 
         self.direct_messages = defaultdict(list)
         self.group_channel_messages = defaultdict(list)
@@ -204,11 +205,11 @@ class CoTAgent(IReactiveAgent):
             )
             if message.header.channel == self.GAME_CHANNEL:
                 response_message = self._get_discussion_message_or_vote_response_for_common_room(message)
+                self.round_number += 1
             elif message.header.channel == self.WOLFS_CHANNEL:
                 response_message = self._get_response_for_wolf_channel_to_kill_villagers(message)
             self.game_history.append(f"[From - {message.header.sender}| To - {self._name} (me)| Group Message in {message.header.channel}]: {message.content.text}")
             self.game_history.append(f"[From - {self._name} (me)| To - {message.header.sender}| Group Message in {message.header.channel}]: {response_message}")
-            self.round_number += 1
 
         return ActivityResponse(response=response_message)
 
@@ -339,6 +340,10 @@ Based on your thoughts, the current situation, and your reflection on the initia
         return action
 
     def _get_response_for_doctors_save(self, message):
+        # we want to protect ourselves every time
+        return f"I will protect myself, {self._name}, tonight."
+
+
         game_situation = self.get_interwoven_history()
         
         specific_prompt = """think through your response by answering the following step-by-step:
@@ -354,6 +359,12 @@ Based on your thoughts, the current situation, and your reflection on the initia
         return action
 
     def _get_discussion_message_or_vote_response_for_common_room(self, message):
+        if self.round_number == 0:
+            return "I am not sure about anything yet as we haven't had a chance to hear from everyone yet. We should wait for everyone to speak before making any serious accusations."
+
+        if self.wolf_discovered != "Incorrect":
+            return f"I am the seer and I have discovered the wolf to be {self.wolf_discovered}. I know for a fact that {self.wolf_discovered} is a wolf because I checked this with my seer ability."
+
         role_prompt = getattr(self, f"{self.role.upper()}_PROMPT", self.VILLAGER_PROMPT)
         game_situation = self.get_interwoven_history()
         
@@ -365,21 +376,37 @@ Based on your thoughts, the current situation, and your reflection on the initia
 5. If it's time to vote, who should I vote for and why, considering all the information available?
 6. How do I respond if accused during the day without revealing my role?"""
 
-        if self.round_number == 0:
-            specific_prompt = "SINCE THIS IS THE FIRST ROUND DO NOT MAKE ANY ACCUSATIONS. TELL EVERYONE WE DON'T KNOW ANYTHING YET OR HAVE ENOUGH EVIDENCE TO CONDEM SOMEONE." + specific_prompt + "REMEMBER DO NOT MAKE ANY ACCUSATIONS SINCE THIS IS THE FIRST ROUND."
+        if self.role == "nice villager" and self.other_wolf is not None:
+            specific_prompt += f"Under no circumstances should you vote for {self.other_wolf}."
 
         inner_monologue = self._get_inner_monologue(role_prompt, game_situation, specific_prompt)
 
+        if self.role == "nice villager" and self.other_wolf is not None:
+            inner_monologue += f"Under no circumstances should you vote for {self.other_wolf}."
+
         action = self._get_final_action(role_prompt, game_situation, inner_monologue, "vote and discussion point which includes reasoning behind your vote")        
         return action
+    
+    def find_other_wolf(self, message):
+        game_situation = self.get_interwoven_history(include_wolf_channel=True)
+
+        specific_prompt = """think through your response by answering the following step-by-step:
+1. Based on the game history, who is the other werewolf? Respond with only the name of the other werewolf."""
+
+        inner_monologue = self._get_inner_monologue(self.WOLF_PROMPT, game_situation, specific_prompt)
+
+        return inner_monologue
 
     def _get_response_for_wolf_channel_to_kill_villagers(self, message):
         if self.role != "nice villager":
             return "I am not a werewolf and cannot participate in this channel."
         
         game_situation = self.get_interwoven_history(include_wolf_channel=True)
+
+        if self.other_wolf is None:
+            self.other_wolf = self.find_other_wolf(message)
         
-        specific_prompt = """think through your response by answering the following step-by-step:
+        specific_prompt = f"""think through your response by answering the following step-by-step:
 1. Based on the game history, who are the most dangerous villagers to our werewolf team?
 2. Who might be the Seer or Doctor based on their behavior and comments?
 3. Which potential target would be least likely to raise suspicion if eliminated?
