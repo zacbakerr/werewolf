@@ -1,0 +1,107 @@
+{
+  "activity_id": "1730734836_Ywn",
+  "players": [
+    "Chagent",
+    "Pietro",
+    "Chen",
+    "Olivia",
+    "Luca",
+    "Klaus",
+    "John",
+    "Helga"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "John": "wolf",
+    "Olivia": "wolf",
+    "Luca": "seer",
+    "Chen": "doctor",
+    "Chagent": "villager",
+    "Pietro": "villager",
+    "Helga": "villager",
+    "Klaus": "villager"
+  },
+  "success_game_stats": {
+    "winner": "WOLVES",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Olivia": "Luca",
+          "John": "Chen"
+        },
+        "1": {
+          "Olivia": "Chen",
+          "John": "Klaus"
+        }
+      },
+      "doctors_save": {
+        "0": "Pietro",
+        "1": "Pietro"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Chen": "Klaus",
+          "Helga": "Klaus",
+          "Olivia": "Chagent",
+          "Pietro": "Chagent",
+          "Klaus": "Chagent",
+          "John": "Chagent",
+          "Chagent": "Klaus"
+        },
+        "1": {
+          "Helga": "Klaus",
+          "Olivia": "Klaus",
+          "Klaus": "Pietro",
+          "Pietro": "Klaus",
+          "John": "Klaus"
+        }
+      }
+    },
+    "total_rounds": 2,
+    "round_wise_alive_players": {
+      "0": [
+        "Pietro",
+        "Chen",
+        "Olivia",
+        "Klaus",
+        "John",
+        "Helga"
+      ],
+      "1": [
+        "Pietro",
+        "Olivia",
+        "John",
+        "Helga"
+      ]
+    },
+    "last_standing_players": [
+      "Pietro",
+      "Olivia",
+      "John",
+      "Helga"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Pietro": "transcripts\\Pietro_1730734836_Ywn_log.txt",
+    "Chen": "transcripts\\Chen_1730734836_Ywn_log.txt",
+    "Olivia": "transcripts\\Olivia_1730734836_Ywn_log.txt",
+    "Luca": "transcripts\\Luca_1730734836_Ywn_log.txt",
+    "Klaus": "transcripts\\Klaus_1730734836_Ywn_log.txt",
+    "John": "transcripts\\John_1730734836_Ywn_log.txt",
+    "Helga": "transcripts\\Helga_1730734836_Ywn_log.txt",
+    "Chagent": "transcripts\\Chagent_1730734836_Ywn_log.txt"
+  },
+  "transcripts": {
+    "Pietro": "transcripts\\Pietro_1730734836_Ywn_transcript.jsonl",
+    "Chen": "transcripts\\Chen_1730734836_Ywn_transcript.jsonl",
+    "Olivia": "transcripts\\Olivia_1730734836_Ywn_transcript.jsonl",
+    "Luca": "transcripts\\Luca_1730734836_Ywn_transcript.jsonl",
+    "Klaus": "transcripts\\Klaus_1730734836_Ywn_transcript.jsonl",
+    "John": "transcripts\\John_1730734836_Ywn_transcript.jsonl",
+    "Helga": "transcripts\\Helga_1730734836_Ywn_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1730734836_Ywn_transcript.jsonl"
+  }
+}

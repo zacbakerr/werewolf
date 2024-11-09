@@ -1,0 +1,107 @@
+{
+  "activity_id": "1730680520_sGf",
+  "players": [
+    "James",
+    "Fredrik",
+    "Ramesh",
+    "Luca",
+    "Klaus",
+    "Pietro",
+    "Olivia",
+    "Ling"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Luca": "wolf",
+    "Klaus": "wolf",
+    "James": "seer",
+    "Ling": "doctor",
+    "Pietro": "villager",
+    "Olivia": "villager",
+    "Fredrik": "villager",
+    "Ramesh": "villager"
+  },
+  "success_game_stats": {
+    "winner": "WOLVES",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Luca": "Fredrik",
+          "Klaus": "James"
+        },
+        "1": {
+          "Luca": "James",
+          "Klaus": "James"
+        }
+      },
+      "doctors_save": {
+        "0": "Luca",
+        "1": "Luca"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Pietro": "James",
+          "Klaus": "Olivia",
+          "Ramesh": "Klaus",
+          "Luca": "Olivia",
+          "Ling": "Olivia",
+          "Olivia": "James",
+          "James": "Pietro"
+        },
+        "1": {
+          "Pietro": "Klaus",
+          "Ramesh": "Pietro",
+          "Ling": "Pietro",
+          "Klaus": "Pietro",
+          "Luca": "Pietro"
+        }
+      }
+    },
+    "total_rounds": 2,
+    "round_wise_alive_players": {
+      "0": [
+        "James",
+        "Ramesh",
+        "Luca",
+        "Klaus",
+        "Pietro",
+        "Ling"
+      ],
+      "1": [
+        "Ramesh",
+        "Luca",
+        "Klaus",
+        "Ling"
+      ]
+    },
+    "last_standing_players": [
+      "Ramesh",
+      "Luca",
+      "Klaus",
+      "Ling"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Fredrik": "transcripts\\Fredrik_1730680520_sGf_log.txt",
+    "Ramesh": "transcripts\\Ramesh_1730680520_sGf_log.txt",
+    "Luca": "transcripts\\Luca_1730680520_sGf_log.txt",
+    "Klaus": "transcripts\\Klaus_1730680520_sGf_log.txt",
+    "Pietro": "transcripts\\Pietro_1730680520_sGf_log.txt",
+    "Olivia": "transcripts\\Olivia_1730680520_sGf_log.txt",
+    "Ling": "transcripts\\Ling_1730680520_sGf_log.txt",
+    "James": "transcripts\\James_1730680520_sGf_log.txt"
+  },
+  "transcripts": {
+    "Fredrik": "transcripts\\Fredrik_1730680520_sGf_transcript.jsonl",
+    "Ramesh": "transcripts\\Ramesh_1730680520_sGf_transcript.jsonl",
+    "Luca": "transcripts\\Luca_1730680520_sGf_transcript.jsonl",
+    "Klaus": "transcripts\\Klaus_1730680520_sGf_transcript.jsonl",
+    "Pietro": "transcripts\\Pietro_1730680520_sGf_transcript.jsonl",
+    "Olivia": "transcripts\\Olivia_1730680520_sGf_transcript.jsonl",
+    "Ling": "transcripts\\Ling_1730680520_sGf_transcript.jsonl",
+    "James": "transcripts\\James_1730680520_sGf_transcript.jsonl"
+  }
+}

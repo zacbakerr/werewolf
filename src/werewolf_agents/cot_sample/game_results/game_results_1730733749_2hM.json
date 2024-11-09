@@ -1,0 +1,117 @@
+{
+  "activity_id": "1730733749_2hM",
+  "players": [
+    "Chagent",
+    "Fredrik",
+    "Jian",
+    "Ramesh",
+    "Wei",
+    "Ananya",
+    "vihaan",
+    "Abhimanyu"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Wei": "wolf",
+    "Ananya": "wolf",
+    "Chagent": "seer",
+    "Fredrik": "doctor",
+    "vihaan": "villager",
+    "Jian": "villager",
+    "Ramesh": "villager",
+    "Abhimanyu": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Wei": "Fredrik",
+          "Ananya": "Jian"
+        },
+        "1": {
+          "Wei": "Jian"
+        },
+        "2": {
+          "Wei": "Abhimanyu"
+        }
+      },
+      "doctors_save": {
+        "0": "Jian",
+        "1": null,
+        "2": null
+      },
+      "alive_players_votes": {
+        "0": {
+          "Wei": "Abhimanyu",
+          "Ramesh": "Ananya",
+          "vihaan": "Ananya",
+          "Chagent": "Abhimanyu",
+          "Jian": "Abhimanyu",
+          "Ananya": "Wei",
+          "Abhimanyu": "Ananya"
+        },
+        "1": {
+          "Abhimanyu": "vihaan",
+          "Ramesh": "Abhimanyu",
+          "Chagent": "vihaan",
+          "vihaan": "Abhimanyu",
+          "Wei": "Chagent"
+        },
+        "2": {
+          "Chagent": "Wei",
+          "Ramesh": "Wei",
+          "Wei": "Chagent"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Jian",
+        "Ramesh",
+        "Wei",
+        "vihaan",
+        "Abhimanyu"
+      ],
+      "1": [
+        "Chagent",
+        "Ramesh",
+        "Wei",
+        "Abhimanyu"
+      ],
+      "2": [
+        "Chagent",
+        "Ramesh"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Ramesh"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Fredrik": "transcripts\\Fredrik_1730733749_2hM_log.txt",
+    "Jian": "transcripts\\Jian_1730733749_2hM_log.txt",
+    "Ramesh": "transcripts\\Ramesh_1730733749_2hM_log.txt",
+    "Wei": "transcripts\\Wei_1730733749_2hM_log.txt",
+    "Ananya": "transcripts\\Ananya_1730733749_2hM_log.txt",
+    "vihaan": "transcripts\\vihaan_1730733749_2hM_log.txt",
+    "Abhimanyu": "transcripts\\Abhimanyu_1730733749_2hM_log.txt",
+    "Chagent": "transcripts\\Chagent_1730733749_2hM_log.txt"
+  },
+  "transcripts": {
+    "Fredrik": "transcripts\\Fredrik_1730733749_2hM_transcript.jsonl",
+    "Jian": "transcripts\\Jian_1730733749_2hM_transcript.jsonl",
+    "Ramesh": "transcripts\\Ramesh_1730733749_2hM_transcript.jsonl",
+    "Wei": "transcripts\\Wei_1730733749_2hM_transcript.jsonl",
+    "Ananya": "transcripts\\Ananya_1730733749_2hM_transcript.jsonl",
+    "vihaan": "transcripts\\vihaan_1730733749_2hM_transcript.jsonl",
+    "Abhimanyu": "transcripts\\Abhimanyu_1730733749_2hM_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1730733749_2hM_transcript.jsonl"
+  }
+}

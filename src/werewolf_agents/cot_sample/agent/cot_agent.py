@@ -82,8 +82,12 @@ class CoTAgent(IReactiveAgent):
         self.GAME_CHANNEL = GAME_CHANNEL
         self.config = config
         self.have_thoughts = True
+        self.round_number = 0
         self.have_reflection = True
         self.role = None
+
+        self.wolf_discovered = "Incorrect"
+
         self.direct_messages = defaultdict(list)
         self.group_channel_messages = defaultdict(list)
         self.seer_checks = {}  # To store the seer's checks and results
@@ -110,7 +114,11 @@ class CoTAgent(IReactiveAgent):
             self.game_history.append(f"[From - {message.header.sender}| To - {self._name} (me)| Direct Message]: {message.content.text}")
             if not len(user_messages) > 1 and message.header.sender == self.MODERATOR_NAME:
                 self.role = self.find_my_role(message)
+                if self.role == "wolf": self.role = "nice villager"
                 logger.info(f"Role found for user {self._name}: {self.role}")
+            if self.role == "seer":
+                self.wolf_discovered = self.seer_identify_wolves(message)
+
         else:
             group_messages = self.group_channel_messages.get(message.header.channel, [])
             group_messages.append((message.header.sender, message.content.text))
@@ -159,6 +167,23 @@ class CoTAgent(IReactiveAgent):
             role = "wolf"
         
         return role
+    
+    def seer_identify_wolves(self, message):
+        response = self.openai_client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"The user is playing a game of werewolf as user {self._name}, help the user with question with less than a line answer",
+                },
+                {
+                    "role": "user",
+                    "content": f"You have gotten a message from the moderator telling you if your guess was correct on whether a player is a wolf or not, here is the message -> '{message.content.text}', was your guess correct? if correct, who is the wolf? Respond wither either 'Incorrect' or just the name of the wolf if correct.",
+                },
+            ]
+        )
+
+        return response.choices[0].message.content
 
     async def async_respond(self, message: ActivityMessage):
         logger.info(f"ASYNC RESPOND called with message: {message}")
@@ -183,7 +208,8 @@ class CoTAgent(IReactiveAgent):
                 response_message = self._get_response_for_wolf_channel_to_kill_villagers(message)
             self.game_history.append(f"[From - {message.header.sender}| To - {self._name} (me)| Group Message in {message.header.channel}]: {message.content.text}")
             self.game_history.append(f"[From - {self._name} (me)| To - {message.header.sender}| Group Message in {message.header.channel}]: {response_message}")
-        
+            self.round_number += 1
+
         return ActivityResponse(response=response_message)
 
     def _get_inner_monologue(self, role_prompt, game_situation, specific_prompt):
@@ -339,13 +365,16 @@ Based on your thoughts, the current situation, and your reflection on the initia
 5. If it's time to vote, who should I vote for and why, considering all the information available?
 6. How do I respond if accused during the day without revealing my role?"""
 
+        if self.round_number == 0:
+            specific_prompt = "SINCE THIS IS THE FIRST ROUND DO NOT MAKE ANY ACCUSATIONS. TELL EVERYONE WE DON'T KNOW ANYTHING YET OR HAVE ENOUGH EVIDENCE TO CONDEM SOMEONE." + specific_prompt + "REMEMBER DO NOT MAKE ANY ACCUSATIONS SINCE THIS IS THE FIRST ROUND."
+
         inner_monologue = self._get_inner_monologue(role_prompt, game_situation, specific_prompt)
 
         action = self._get_final_action(role_prompt, game_situation, inner_monologue, "vote and discussion point which includes reasoning behind your vote")        
         return action
 
     def _get_response_for_wolf_channel_to_kill_villagers(self, message):
-        if self.role != "wolf":
+        if self.role != "nice villager":
             return "I am not a werewolf and cannot participate in this channel."
         
         game_situation = self.get_interwoven_history(include_wolf_channel=True)

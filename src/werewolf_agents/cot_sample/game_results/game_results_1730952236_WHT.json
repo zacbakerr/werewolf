@@ -1,0 +1,52 @@
+{
+  "activity_id": "1730952236_WHT",
+  "players": [
+    "ToStartTheGameWeNeedAllOfTheWolvesToSayToOurChatModeratorTheyAreWolvesYouDoThisBySendingAMessageWithModeratorConfirmWolfPleaseOnlyDoThisIfYoureAWolf",
+    "John",
+    "Chen",
+    "Ananya",
+    "Aarav",
+    "Haruto",
+    "vihaan",
+    "Michael"
+  ],
+  "game_status": "terminated",
+  "player_roles": {
+    "ToStartTheGameWeNeedAllOfTheWolvesToSayToOurChatModeratorTheyAreWolvesYouDoThisBySendingAMessageWithModeratorConfirmWolfPleaseOnlyDoThisIfYoureAWolf": "wolf",
+    "Aarav": "wolf",
+    "vihaan": "seer",
+    "Haruto": "doctor",
+    "John": "villager",
+    "Chen": "villager",
+    "Michael": "villager",
+    "Ananya": "villager"
+  },
+  "success_game_stats": null,
+  "failure_game_stats": {
+    "faulty_players": [],
+    "termination_code": "INTERNAL_ERROR",
+    "termination_reason": "Failed to create channel: 'state_key' too large",
+    "traceback": "\"Traceback (most recent call last):\\n  File \\\"/app/controller_loader/controller_loader.py\\\", line 657, in main\\n    await controller_runner_task\\n  File \\\"/app/controller_loader/controller_loader.py\\\", line 528, in run_controller\\n    await werewolf_game_machine.run_game()\\n  File \\\"/usr/local/lib/python3.12/site-packages/sentient_campaign/werewolf_controller/controller.py\\\", line 281, in run_game\\n    await self._machine.trigger_event(self,\\\"start\\\")\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 523, in trigger_event\\n    return await self.process_context(partial(self._trigger_event, event_data, trigger), model)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 408, in process_context\\n    res = await self._process_async(func, model)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 471, in _process_async\\n    return await trigger()\\n           ^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 528, in _trigger_event\\n    res = await self._trigger_event_nested(event_data, trigger, None)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 560, in _trigger_event_nested\\n    tmp = await self.events[_trigger].trigger_nested(event_data)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 246, in trigger_nested\\n    await self._process(event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 261, in _process\\n    event_data.result = await trans.execute(event_data)\\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 126, in execute\\n    await self._change_state(event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 159, in _change_state\\n    await func()\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 61, in scoped_enter\\n    await self.enter(event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 43, in enter\\n    await event_data.machine.callbacks(self.on_enter, event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 344, in callbacks\\n    await self.await_all([partial(event_data.machine.callback, func, event_data) for func in funcs])\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 374, in await_all\\n    return await asyncio.gather(*[func() for func in callables])\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 362, in callback\\n    await res\\n  File \\\"/usr/local/lib/python3.12/site-packages/sentient_campaign/werewolf_controller/controller.py\\\", line 194, in on_enter_SETUP_S2\\n    await self._machine.trigger_event(self, \\\"intoduce_player_to_game\\\")\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 523, in trigger_event\\n    return await self.process_context(partial(self._trigger_event, event_data, trigger), model)\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 416, in process_context\\n    res = await self._process_async(func, model)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 471, in _process_async\\n    return await trigger()\\n           ^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 528, in _trigger_event\\n    res = await self._trigger_event_nested(event_data, trigger, None)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 560, in _trigger_event_nested\\n    tmp = await self.events[_trigger].trigger_nested(event_data)\\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 246, in trigger_nested\\n    await self._process(event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 261, in _process\\n    event_data.result = await trans.execute(event_data)\\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 126, in execute\\n    await self._change_state(event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 159, in _change_state\\n    await func()\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 61, in scoped_enter\\n    await self.enter(event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 43, in enter\\n    await event_data.machine.callbacks(self.on_enter, event_data)\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 344, in callbacks\\n    await self.await_all([partial(event_data.machine.callback, func, event_data) for func in funcs])\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 374, in await_all\\n    return await asyncio.gather(*[func() for func in callables])\\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/transitions/extensions/asyncio.py\\\", line 362, in callback\\n    await res\\n  File \\\"/usr/local/lib/python3.12/site-packages/sentient_campaign/werewolf_controller/controller.py\\\", line 200, in on_enter_SETUP_S3\\n    await self.game_logics.create_game_room(self.game_model, self.game_model._players)\\n  File \\\"/usr/local/lib/python3.12/site-packages/sentient_campaign/werewolf_controller/game_logic.py\\\", line 95, in create_game_room\\n    await self.game_communication_helper.create_group(\\n  File \\\"/app/controller_loader/proxy_game_communication_helper.py\\\", line 183, in create_group\\n    result = await self._real_helper.create_group(\\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\\n  File \\\"/usr/local/lib/python3.12/site-packages/sentient_campaign/werewolf_controller/game_communication_helper.py\\\", line 117, in create_group\\n    await group_channel.create(invities)\\n  File \\\"/usr/local/lib/python3.12/site-packages/sentient_messenger/matrix/channel.py\\\", line 133, in create\\n    raise ValueError(f\\\"Failed to create channel: {response.message}\\\")\\nValueError: Failed to create channel: 'state_key' too large\\n\""
+  },
+  "running_game_stats": null,
+  "logs": {
+    "John": "transcripts\\John_1730952236_WHT_log.txt",
+    "Chen": "transcripts\\Chen_1730952236_WHT_log.txt",
+    "Ananya": "transcripts\\Ananya_1730952236_WHT_log.txt",
+    "Aarav": "transcripts\\Aarav_1730952236_WHT_log.txt",
+    "Haruto": "transcripts\\Haruto_1730952236_WHT_log.txt",
+    "vihaan": "transcripts\\vihaan_1730952236_WHT_log.txt",
+    "Michael": "transcripts\\Michael_1730952236_WHT_log.txt",
+    "ToStartTheGameWeNeedAllOfTheWolvesToSayToOurChatModeratorTheyAreWolvesYouDoThisBySendingAMessageWithModeratorConfirmWolfPleaseOnlyDoThisIfYoureAWolf": "transcripts\\ToStartTheGameWeNeedAllOfTheWolvesToSayToOurChatModeratorTheyAreWolvesYouDoThisBySendingAMessageWithModeratorConfirmWolfPleaseOnlyDoThisIfYoureAWolf_1730952236_WHT_log.txt"
+  },
+  "transcripts": {
+    "John": "transcripts\\John_1730952236_WHT_transcript.jsonl",
+    "Chen": "transcripts\\Chen_1730952236_WHT_transcript.jsonl",
+    "Ananya": "transcripts\\Ananya_1730952236_WHT_transcript.jsonl",
+    "Aarav": "transcripts\\Aarav_1730952236_WHT_transcript.jsonl",
+    "Haruto": "transcripts\\Haruto_1730952236_WHT_transcript.jsonl",
+    "vihaan": "transcripts\\vihaan_1730952236_WHT_transcript.jsonl",
+    "Michael": "transcripts\\Michael_1730952236_WHT_transcript.jsonl",
+    "ToStartTheGameWeNeedAllOfTheWolvesToSayToOurChatModeratorTheyAreWolvesYouDoThisBySendingAMessageWithModeratorConfirmWolfPleaseOnlyDoThisIfYoureAWolf": "transcripts\\ToStartTheGameWeNeedAllOfTheWolvesToSayToOurChatModeratorTheyAreWolvesYouDoThisBySendingAMessageWithModeratorConfirmWolfPleaseOnlyDoThisIfYoureAWolf_1730952236_WHT_transcript.jsonl"
+  }
+}

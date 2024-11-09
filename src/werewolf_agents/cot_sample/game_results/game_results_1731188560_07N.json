@@ -1,0 +1,106 @@
+{
+  "activity_id": "1731188560_07N",
+  "players": [
+    "Chagent",
+    "Helga",
+    "Emily",
+    "Elise",
+    "Wei",
+    "Akira",
+    "Ananya",
+    "Olivia"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Helga": "wolf",
+    "Akira": "wolf",
+    "Chagent": "seer",
+    "Wei": "doctor",
+    "Emily": "villager",
+    "Elise": "villager",
+    "Ananya": "villager",
+    "Olivia": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Helga": "Olivia",
+          "Akira": "Olivia"
+        },
+        "1": {
+          "Helga": "Emily"
+        }
+      },
+      "doctors_save": {
+        "0": "Ananya",
+        "1": "Ananya"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Helga": "Ananya",
+          "Chagent": "Akira",
+          "Elise": "Emily",
+          "Emily": "Akira",
+          "Ananya": "Helga",
+          "Wei": "Chagent",
+          "Akira": "Emily"
+        },
+        "1": {
+          "Ananya": "Helga",
+          "Helga": "Chagent",
+          "Chagent": "Helga",
+          "Wei": "Helga",
+          "Elise": "Chagent"
+        }
+      }
+    },
+    "total_rounds": 2,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Helga",
+        "Emily",
+        "Elise",
+        "Wei",
+        "Ananya"
+      ],
+      "1": [
+        "Chagent",
+        "Elise",
+        "Wei",
+        "Ananya"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Elise",
+      "Wei",
+      "Ananya"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Helga": "transcripts\\Helga_1731188560_07N_log.txt",
+    "Emily": "transcripts\\Emily_1731188560_07N_log.txt",
+    "Elise": "transcripts\\Elise_1731188560_07N_log.txt",
+    "Wei": "transcripts\\Wei_1731188560_07N_log.txt",
+    "Akira": "transcripts\\Akira_1731188560_07N_log.txt",
+    "Ananya": "transcripts\\Ananya_1731188560_07N_log.txt",
+    "Olivia": "transcripts\\Olivia_1731188560_07N_log.txt",
+    "Chagent": "transcripts\\Chagent_1731188560_07N_log.txt"
+  },
+  "transcripts": {
+    "Helga": "transcripts\\Helga_1731188560_07N_transcript.jsonl",
+    "Emily": "transcripts\\Emily_1731188560_07N_transcript.jsonl",
+    "Elise": "transcripts\\Elise_1731188560_07N_transcript.jsonl",
+    "Wei": "transcripts\\Wei_1731188560_07N_transcript.jsonl",
+    "Akira": "transcripts\\Akira_1731188560_07N_transcript.jsonl",
+    "Ananya": "transcripts\\Ananya_1731188560_07N_transcript.jsonl",
+    "Olivia": "transcripts\\Olivia_1731188560_07N_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731188560_07N_transcript.jsonl"
+  }
+}

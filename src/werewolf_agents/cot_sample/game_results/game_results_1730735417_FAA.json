@@ -1,0 +1,128 @@
+{
+  "activity_id": "1730735417_FAA",
+  "players": [
+    "Chagent",
+    "Sophie",
+    "Emma",
+    "Michael",
+    "Myra",
+    "Arjun",
+    "John",
+    "Chen"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Myra": "wolf",
+    "Chagent": "wolf",
+    "Arjun": "seer",
+    "Michael": "doctor",
+    "Chen": "villager",
+    "Sophie": "villager",
+    "Emma": "villager",
+    "John": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Chagent": "Emma",
+          "Myra": "Michael"
+        },
+        "1": {
+          "Chagent": "Chen",
+          "Myra": "Sophie"
+        },
+        "2": {
+          "Chagent": "Emma"
+        }
+      },
+      "doctors_save": {
+        "0": "Emma",
+        "1": "Emma",
+        "2": "Emma"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Arjun": "Chagent",
+          "Emma": "Arjun",
+          "Chen": "Arjun",
+          "Sophie": "Arjun",
+          "Myra": "Arjun",
+          "Michael": "Arjun",
+          "Chagent": "Arjun",
+          "John": "Arjun"
+        },
+        "1": {
+          "Michael": "Myra",
+          "Myra": "Michael",
+          "John": "Myra",
+          "Sophie": "Myra",
+          "Emma": "Myra",
+          "Chagent": "Michael"
+        },
+        "2": {
+          "Sophie": "Chagent",
+          "Emma": "Chagent",
+          "Chagent": "Emma",
+          "John": "Chagent",
+          "Michael": "Chagent"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Sophie",
+        "Emma",
+        "Michael",
+        "Myra",
+        "John",
+        "Chen"
+      ],
+      "1": [
+        "Chagent",
+        "Sophie",
+        "Emma",
+        "Michael",
+        "John"
+      ],
+      "2": [
+        "Sophie",
+        "Emma",
+        "Michael",
+        "John"
+      ]
+    },
+    "last_standing_players": [
+      "Sophie",
+      "Emma",
+      "Michael",
+      "John"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Sophie": "transcripts\\Sophie_1730735417_FAA_log.txt",
+    "Emma": "transcripts\\Emma_1730735417_FAA_log.txt",
+    "Michael": "transcripts\\Michael_1730735417_FAA_log.txt",
+    "Myra": "transcripts\\Myra_1730735417_FAA_log.txt",
+    "Arjun": "transcripts\\Arjun_1730735417_FAA_log.txt",
+    "John": "transcripts\\John_1730735417_FAA_log.txt",
+    "Chen": "transcripts\\Chen_1730735417_FAA_log.txt",
+    "Chagent": "transcripts\\Chagent_1730735417_FAA_log.txt"
+  },
+  "transcripts": {
+    "Sophie": "transcripts\\Sophie_1730735417_FAA_transcript.jsonl",
+    "Emma": "transcripts\\Emma_1730735417_FAA_transcript.jsonl",
+    "Michael": "transcripts\\Michael_1730735417_FAA_transcript.jsonl",
+    "Myra": "transcripts\\Myra_1730735417_FAA_transcript.jsonl",
+    "Arjun": "transcripts\\Arjun_1730735417_FAA_transcript.jsonl",
+    "John": "transcripts\\John_1730735417_FAA_transcript.jsonl",
+    "Chen": "transcripts\\Chen_1730735417_FAA_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1730735417_FAA_transcript.jsonl"
+  }
+}
