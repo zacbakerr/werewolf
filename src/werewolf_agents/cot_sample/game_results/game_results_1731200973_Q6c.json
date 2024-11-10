@@ -1,0 +1,118 @@
+{
+  "activity_id": "1731200973_Q6c",
+  "players": [
+    "Chagent",
+    "Ingrid",
+    "Ling",
+    "Olivia",
+    "Emily",
+    "Wei",
+    "Astrid",
+    "Emma"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Astrid": "wolf",
+    "Ingrid": "wolf",
+    "Emma": "seer",
+    "Wei": "doctor",
+    "Chagent": "villager",
+    "Ling": "villager",
+    "Emily": "villager",
+    "Olivia": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Ingrid": "Olivia",
+          "Astrid": "Olivia"
+        },
+        "1": {
+          "Ingrid": "Wei",
+          "Astrid": "Wei"
+        },
+        "2": {
+          "Ingrid": "Emily"
+        }
+      },
+      "doctors_save": {
+        "0": "Ingrid",
+        "1": "Astrid",
+        "2": null
+      },
+      "alive_players_votes": {
+        "0": {
+          "Chagent": "Emma",
+          "Ingrid": "Emma",
+          "Emily": "Emma",
+          "Wei": "Emma",
+          "Ling": "Emma",
+          "Astrid": "Emma",
+          "Emma": "Astrid"
+        },
+        "1": {
+          "Ingrid": "Emily",
+          "Chagent": "Astrid",
+          "Emily": "Astrid",
+          "Astrid": "Ingrid",
+          "Ling": "Astrid"
+        },
+        "2": {
+          "Chagent": "Ingrid",
+          "Ling": "Ingrid",
+          "Ingrid": "Ling"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Ingrid",
+        "Ling",
+        "Emily",
+        "Wei",
+        "Astrid"
+      ],
+      "1": [
+        "Chagent",
+        "Ingrid",
+        "Ling",
+        "Emily"
+      ],
+      "2": [
+        "Chagent",
+        "Ling"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Ling"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Ingrid": "transcripts\\Ingrid_1731200973_Q6c_log.txt",
+    "Ling": "transcripts\\Ling_1731200973_Q6c_log.txt",
+    "Olivia": "transcripts\\Olivia_1731200973_Q6c_log.txt",
+    "Emily": "transcripts\\Emily_1731200973_Q6c_log.txt",
+    "Wei": "transcripts\\Wei_1731200973_Q6c_log.txt",
+    "Astrid": "transcripts\\Astrid_1731200973_Q6c_log.txt",
+    "Emma": "transcripts\\Emma_1731200973_Q6c_log.txt",
+    "Chagent": "transcripts\\Chagent_1731200973_Q6c_log.txt"
+  },
+  "transcripts": {
+    "Ingrid": "transcripts\\Ingrid_1731200973_Q6c_transcript.jsonl",
+    "Ling": "transcripts\\Ling_1731200973_Q6c_transcript.jsonl",
+    "Olivia": "transcripts\\Olivia_1731200973_Q6c_transcript.jsonl",
+    "Emily": "transcripts\\Emily_1731200973_Q6c_transcript.jsonl",
+    "Wei": "transcripts\\Wei_1731200973_Q6c_transcript.jsonl",
+    "Astrid": "transcripts\\Astrid_1731200973_Q6c_transcript.jsonl",
+    "Emma": "transcripts\\Emma_1731200973_Q6c_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731200973_Q6c_transcript.jsonl"
+  }
+}

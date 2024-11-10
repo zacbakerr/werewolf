@@ -1,0 +1,106 @@
+{
+  "activity_id": "1731194076_7kx",
+  "players": [
+    "James",
+    "Helga",
+    "Abhimanyu",
+    "John",
+    "Pietro",
+    "Wei",
+    "Kiara",
+    "Ling"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Abhimanyu": "wolf",
+    "Helga": "wolf",
+    "James": "seer",
+    "Ling": "doctor",
+    "Pietro": "villager",
+    "Wei": "villager",
+    "John": "villager",
+    "Kiara": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Helga": "Ling",
+          "Abhimanyu": "Pietro"
+        },
+        "1": {
+          "Helga": "Kiara"
+        }
+      },
+      "doctors_save": {
+        "0": "John",
+        "1": null
+      },
+      "alive_players_votes": {
+        "0": {
+          "Abhimanyu": "John",
+          "Wei": "Abhimanyu",
+          "James": "Abhimanyu",
+          "John": "Abhimanyu",
+          "Helga": "John",
+          "Kiara": "Abhimanyu",
+          "Pietro": "Abhimanyu"
+        },
+        "1": {
+          "Wei": "Helga",
+          "Helga": "Wei",
+          "John": "Helga",
+          "James": "Helga",
+          "Pietro": "Helga"
+        }
+      }
+    },
+    "total_rounds": 2,
+    "round_wise_alive_players": {
+      "0": [
+        "James",
+        "Helga",
+        "John",
+        "Pietro",
+        "Wei",
+        "Kiara"
+      ],
+      "1": [
+        "James",
+        "John",
+        "Pietro",
+        "Wei"
+      ]
+    },
+    "last_standing_players": [
+      "James",
+      "John",
+      "Pietro",
+      "Wei"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Helga": "transcripts\\Helga_1731194076_7kx_log.txt",
+    "Abhimanyu": "transcripts\\Abhimanyu_1731194076_7kx_log.txt",
+    "John": "transcripts\\John_1731194076_7kx_log.txt",
+    "Pietro": "transcripts\\Pietro_1731194076_7kx_log.txt",
+    "Wei": "transcripts\\Wei_1731194076_7kx_log.txt",
+    "Kiara": "transcripts\\Kiara_1731194076_7kx_log.txt",
+    "Ling": "transcripts\\Ling_1731194076_7kx_log.txt",
+    "James": "transcripts\\James_1731194076_7kx_log.txt"
+  },
+  "transcripts": {
+    "Helga": "transcripts\\Helga_1731194076_7kx_transcript.jsonl",
+    "Abhimanyu": "transcripts\\Abhimanyu_1731194076_7kx_transcript.jsonl",
+    "John": "transcripts\\John_1731194076_7kx_transcript.jsonl",
+    "Pietro": "transcripts\\Pietro_1731194076_7kx_transcript.jsonl",
+    "Wei": "transcripts\\Wei_1731194076_7kx_transcript.jsonl",
+    "Kiara": "transcripts\\Kiara_1731194076_7kx_transcript.jsonl",
+    "Ling": "transcripts\\Ling_1731194076_7kx_transcript.jsonl",
+    "James": "transcripts\\James_1731194076_7kx_transcript.jsonl"
+  }
+}
