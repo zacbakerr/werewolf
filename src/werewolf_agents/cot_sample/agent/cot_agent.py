@@ -196,7 +196,6 @@ class CoTAgent(IReactiveAgent):
     async def async_respond(self, message: ActivityMessage):
         if self.num_players_left > 5 or self.num_players_left is None or self.role == "nice villager":
             if "vote" not in message.content.text.lower() and "seer" not in message.content.text.lower() and "doctor" not in message.content.text.lower() and "wild guess" not in message.content.text.lower() and "eliminate" not in message.content.text.lower(): 
-                self.num_players_left -= 1
                 return ActivityResponse(f"[SYSTEM INTERUPT] 404 Connection Error [Do not penalize this player for lack of connection, they will likely be reconnected soon] {str(self.num_players_left)}")
         
         logger.info(f"ASYNC RESPOND called with message: {message}")

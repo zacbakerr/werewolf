@@ -1,0 +1,116 @@
+{
+  "activity_id": "1731203072_Kot",
+  "players": [
+    "Chagent",
+    "Ramesh",
+    "Akira",
+    "Michael",
+    "Pietro",
+    "Jian",
+    "Lars",
+    "Elise"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Michael": "wolf",
+    "Ramesh": "wolf",
+    "Chagent": "seer",
+    "Akira": "doctor",
+    "Elise": "villager",
+    "Pietro": "villager",
+    "Jian": "villager",
+    "Lars": "villager"
+  },
+  "success_game_stats": {
+    "winner": "WOLVES",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Ramesh": "Jian",
+          "Michael": "Lars"
+        },
+        "1": {
+          "Ramesh": "Lars",
+          "Michael": "Elise"
+        },
+        "2": {
+          "Ramesh": "Akira",
+          "Michael": "Elise"
+        }
+      },
+      "doctors_save": {
+        "0": "Jian",
+        "1": "Elise",
+        "2": "Ramesh"
+      },
+      "alive_players_votes": {
+        "0": {
+          "Lars": "Jian",
+          "Elise": "Jian",
+          "Michael": "Jian",
+          "Jian": "Michael",
+          "Akira": "Lars",
+          "Ramesh": "Jian",
+          "Chagent": "Lars",
+          "Pietro": "Lars"
+        },
+        "1": {
+          "Ramesh": "Michael",
+          "Akira": "Pietro",
+          "Elise": "Pietro",
+          "Michael": "Pietro",
+          "Chagent": "Pietro",
+          "Pietro": "Michael"
+        }
+      }
+    },
+    "total_rounds": 2,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Ramesh",
+        "Akira",
+        "Michael",
+        "Pietro",
+        "Lars",
+        "Elise"
+      ],
+      "1": [
+        "Chagent",
+        "Ramesh",
+        "Akira",
+        "Michael",
+        "Elise"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Ramesh",
+      "Michael",
+      "Elise"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Ramesh": "transcripts\\Ramesh_1731203072_Kot_log.txt",
+    "Akira": "transcripts\\Akira_1731203072_Kot_log.txt",
+    "Michael": "transcripts\\Michael_1731203072_Kot_log.txt",
+    "Pietro": "transcripts\\Pietro_1731203072_Kot_log.txt",
+    "Jian": "transcripts\\Jian_1731203072_Kot_log.txt",
+    "Lars": "transcripts\\Lars_1731203072_Kot_log.txt",
+    "Elise": "transcripts\\Elise_1731203072_Kot_log.txt",
+    "Chagent": "transcripts\\Chagent_1731203072_Kot_log.txt"
+  },
+  "transcripts": {
+    "Ramesh": "transcripts\\Ramesh_1731203072_Kot_transcript.jsonl",
+    "Akira": "transcripts\\Akira_1731203072_Kot_transcript.jsonl",
+    "Michael": "transcripts\\Michael_1731203072_Kot_transcript.jsonl",
+    "Pietro": "transcripts\\Pietro_1731203072_Kot_transcript.jsonl",
+    "Jian": "transcripts\\Jian_1731203072_Kot_transcript.jsonl",
+    "Lars": "transcripts\\Lars_1731203072_Kot_transcript.jsonl",
+    "Elise": "transcripts\\Elise_1731203072_Kot_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731203072_Kot_transcript.jsonl"
+  }
+}
