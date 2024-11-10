@@ -1,0 +1,117 @@
+{
+  "activity_id": "1731201974_MkD",
+  "players": [
+    "Chagent",
+    "Sophie",
+    "Lars",
+    "Emma",
+    "Klaus",
+    "Astrid",
+    "Ananya",
+    "Myra"
+  ],
+  "game_status": "ended",
+  "player_roles": {
+    "Lars": "wolf",
+    "Sophie": "wolf",
+    "Emma": "seer",
+    "Ananya": "doctor",
+    "Astrid": "villager",
+    "Myra": "villager",
+    "Klaus": "villager",
+    "Chagent": "villager"
+  },
+  "success_game_stats": {
+    "winner": "VILLAGERS",
+    "vote_history": {
+      "wolf_votes": {
+        "0": {
+          "Sophie": "Emma",
+          "Lars": "Emma"
+        },
+        "1": {
+          "Sophie": "Ananya"
+        },
+        "2": {
+          "Sophie": "Klaus"
+        }
+      },
+      "doctors_save": {
+        "0": "Astrid",
+        "1": "Sophie",
+        "2": null
+      },
+      "alive_players_votes": {
+        "0": {
+          "Astrid": "Klaus",
+          "Lars": "Klaus",
+          "Ananya": "Lars",
+          "Myra": "Lars",
+          "Sophie": "Klaus",
+          "Klaus": "Lars",
+          "Chagent": "Lars"
+        },
+        "1": {
+          "Myra": "Astrid",
+          "Chagent": "Astrid",
+          "Astrid": "Sophie",
+          "Sophie": "Astrid",
+          "Klaus": "Astrid"
+        },
+        "2": {
+          "Myra": "Sophie",
+          "Chagent": "Sophie",
+          "Sophie": "Myra"
+        }
+      }
+    },
+    "total_rounds": 3,
+    "round_wise_alive_players": {
+      "0": [
+        "Chagent",
+        "Sophie",
+        "Klaus",
+        "Astrid",
+        "Ananya",
+        "Myra"
+      ],
+      "1": [
+        "Chagent",
+        "Sophie",
+        "Klaus",
+        "Myra"
+      ],
+      "2": [
+        "Chagent",
+        "Myra"
+      ]
+    },
+    "last_standing_players": [
+      "Chagent",
+      "Myra"
+    ],
+    "player_errors": {}
+  },
+  "failure_game_stats": null,
+  "running_game_stats": null,
+  "logs": {
+    "Sophie": "transcripts\\Sophie_1731201974_MkD_log.txt",
+    "Lars": "transcripts\\Lars_1731201974_MkD_log.txt",
+    "Emma": "transcripts\\Emma_1731201974_MkD_log.txt",
+    "Klaus": "transcripts\\Klaus_1731201974_MkD_log.txt",
+    "Astrid": "transcripts\\Astrid_1731201974_MkD_log.txt",
+    "Ananya": "transcripts\\Ananya_1731201974_MkD_log.txt",
+    "Myra": "transcripts\\Myra_1731201974_MkD_log.txt",
+    "Chagent": "transcripts\\Chagent_1731201974_MkD_log.txt"
+  },
+  "transcripts": {
+    "Sophie": "transcripts\\Sophie_1731201974_MkD_transcript.jsonl",
+    "Lars": "transcripts\\Lars_1731201974_MkD_transcript.jsonl",
+    "Emma": "transcripts\\Emma_1731201974_MkD_transcript.jsonl",
+    "Klaus": "transcripts\\Klaus_1731201974_MkD_transcript.jsonl",
+    "Astrid": "transcripts\\Astrid_1731201974_MkD_transcript.jsonl",
+    "Ananya": "transcripts\\Ananya_1731201974_MkD_transcript.jsonl",
+    "Myra": "transcripts\\Myra_1731201974_MkD_transcript.jsonl",
+    "Chagent": "transcripts\\Chagent_1731201974_MkD_transcript.jsonl"
+  }
+}
